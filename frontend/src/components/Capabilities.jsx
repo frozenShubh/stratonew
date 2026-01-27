@@ -139,37 +139,51 @@ export const Capabilities = () => {
         >
           <Accordion type="single" collapsible className="space-y-4">
             {capabilities.map((capability, index) => (
-              <AccordionItem
+              <motion.div
                 key={index}
-                value={`item-${index}`}
-                className="bg-white border border-slate-200 rounded-lg px-6 hover:shadow-md transition-shadow duration-300"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
               >
-                <AccordionTrigger className="hover:no-underline py-6">
-                  <div className="flex items-center space-x-4 text-left">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
-                        <capability.icon className="text-slate-700" size={24} />
-                      </div>
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-slate-900">
-                      {capability.title}
-                    </h3>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="pt-2 pb-6">
-                  <ul className="space-y-3 ml-16">
-                    {capability.items.map((item, itemIndex) => (
-                      <li
-                        key={itemIndex}
-                        className="text-slate-600 flex items-start space-x-3"
+                <AccordionItem
+                  value={`item-${index}`}
+                  className="bg-white border border-slate-200 rounded-lg px-6 hover:shadow-xl hover:border-slate-300 transition-all duration-300"
+                >
+                  <AccordionTrigger className="hover:no-underline py-6">
+                    <div className="flex items-center space-x-4 text-left">
+                      <motion.div
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                        className="flex-shrink-0"
                       >
-                        <span className="text-slate-400 mt-1.5">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </AccordionContent>
-              </AccordionItem>
+                        <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
+                          <capability.icon className="text-slate-700" size={24} />
+                        </div>
+                      </motion.div>
+                      <h3 className="text-xl md:text-2xl font-semibold text-slate-900">
+                        {capability.title}
+                      </h3>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pt-2 pb-6">
+                    <ul className="space-y-3 ml-16">
+                      {capability.items.map((item, itemIndex) => (
+                        <motion.li
+                          key={itemIndex}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3, delay: itemIndex * 0.05 }}
+                          className="text-slate-600 flex items-start space-x-3"
+                        >
+                          <span className="text-slate-400 mt-1.5">•</span>
+                          <span>{item}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
             ))}
           </Accordion>
         </motion.div>
