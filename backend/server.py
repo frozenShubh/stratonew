@@ -102,6 +102,33 @@ async def get_status_checks():
     
     return status_checks
 
+@api_router.post("/contact", response_model=dict, status_code=201)
+async def create_contact_submission(input: ContactSubmissionCreate):
+    try:
+        # Create contact submission object
+        submission_dict = input.dict()
+        submission_obj = ContactSubmission(**submission_dict)
+        
+        # Insert into database
+        result = await db.contact_submissions.insert_one(submission_obj.dict())
+        
+        logger.info(f"Contact submission created: {submission_obj.id}")
+        
+        return {
+            "success": True,
+            "message": "Thank you for reaching out. We'll respond within 24 hours.",
+            "submissionId": submission_obj.id
+        }
+    except Exception as e:
+        logger.error(f"Error creating contact submission: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.get("/contact", response_model=List[ContactSubmission])
+async def get_contact_submissions():
+    """Get all contact submissions (for admin use)"""
+    submissions = await db.contact_submissions.find().to_list(1000)
+    return [ContactSubmission(**submission) for submission in submissions]
+
 # Include the router in the main app
 app.include_router(api_router)
 
