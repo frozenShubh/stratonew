@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '../components/Header';
-import { HeroNew } from '../components/HeroNew';
+import { HeroFinal } from '../components/HeroFinal';
 import { WhatWeDo } from '../components/WhatWeDo';
 import { Capabilities } from '../components/Capabilities';
 import { StrategicServices } from '../components/StrategicServices';
@@ -16,7 +16,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-[#020507]">
       <Header />
-      <HeroNew />
+      <HeroFinal />
       <WhatWeDo />
       <Capabilities />
       <StrategicServices />
