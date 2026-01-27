@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '../components/Header';
-import { Hero } from '../components/Hero';
+import { HeroNew } from '../components/HeroNew';
 import { WhatWeDo } from '../components/WhatWeDo';
 import { Capabilities } from '../components/Capabilities';
 import { StrategicServices } from '../components/StrategicServices';
@@ -14,9 +14,9 @@ import { Footer } from '../components/Footer';
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#020507]">
       <Header />
-      <Hero />
+      <HeroNew />
       <WhatWeDo />
       <Capabilities />
       <StrategicServices />
@@ -29,6 +29,4 @@ const HomePage = () => {
       <Footer />
     </div>
   );
-};
-
-export default HomePage;
+};\n\nexport default HomePage;
