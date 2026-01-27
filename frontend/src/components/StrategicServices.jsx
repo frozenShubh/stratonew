@@ -83,12 +83,17 @@ export const StrategicServices = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.05 }}
+              whileHover={{ y: -10, transition: { duration: 0.3 } }}
             >
-              <Card className="h-full border-slate-200 hover:shadow-lg transition-all duration-300 hover:border-slate-300 group">
+              <Card className="h-full border-slate-200 hover:shadow-2xl transition-all duration-300 hover:border-slate-400 group">
                 <CardHeader>
-                  <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-slate-200 transition-colors duration-300">
-                    <service.icon className="text-slate-700" size={24} />
-                  </div>
+                  <motion.div
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                    className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-slate-800 transition-colors duration-300"
+                  >
+                    <service.icon className="text-slate-700 group-hover:text-white transition-colors duration-300" size={24} />
+                  </motion.div>
                   <CardTitle className="text-lg font-semibold text-slate-900">
                     {service.title}
                   </CardTitle>
