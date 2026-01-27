@@ -90,7 +90,7 @@ export const CaseStudiesSlideshow = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-[#0A0D10] overflow-hidden">
+    <section id="impact" className="py-24 md:py-32 bg-[#0A0D10] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
