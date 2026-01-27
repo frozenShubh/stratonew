@@ -49,12 +49,17 @@ export const WhatWeDo = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -10, transition: { duration: 0.3 } }}
               className="group"
             >
               <div className="mb-6">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-slate-100 rounded-lg group-hover:bg-slate-200 transition-colors duration-300">
-                  <feature.icon className="text-slate-700" size={28} />
-                </div>
+                <motion.div
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                  className="inline-flex items-center justify-center w-14 h-14 bg-slate-100 rounded-lg group-hover:bg-slate-800 transition-colors duration-300"
+                >
+                  <feature.icon className="text-slate-700 group-hover:text-white transition-colors duration-300" size={28} />
+                </motion.div>
               </div>
               <h3 className="text-2xl font-semibold text-slate-900 mb-3">
                 {feature.title}
