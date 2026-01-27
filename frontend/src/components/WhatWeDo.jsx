@@ -50,21 +50,21 @@ export const WhatWeDo = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className=\"group bg-[#0D1117]/50 backdrop-blur-sm p-8 rounded-xl border border-white/5 hover:border-[#539AC1]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[#539AC1]/10\"
+              className="group bg-[#0D1117]/50 backdrop-blur-sm p-8 rounded-xl border border-white/5 hover:border-[#539AC1]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[#539AC1]/10"
             >
-              <div className=\"mb-6\">
+              <div className="mb-6">
                 <motion.div
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
-                  className=\"inline-flex items-center justify-center w-14 h-14 bg-[#0D4669]/50 rounded-lg group-hover:bg-[#539AC1]/20 transition-colors duration-300\"
+                  className="inline-flex items-center justify-center w-14 h-14 bg-[#0D4669]/50 rounded-lg group-hover:bg-[#539AC1]/20 transition-colors duration-300"
                 >
-                  <feature.icon className=\"text-[#A5C7E0]\" size={28} />
+                  <feature.icon className="text-[#A5C7E0]" size={28} />
                 </motion.div>
               </div>
-              <h3 className=\"text-2xl font-semibold text-white mb-3\">
+              <h3 className="text-2xl font-semibold text-white mb-3">
                 {feature.title}
               </h3>
-              <p className=\"text-[#D9EAF6]/70 leading-relaxed\">
+              <p className="text-[#D9EAF6]/70 leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>
