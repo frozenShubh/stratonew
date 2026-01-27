@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import HomePageAccenture from './pages/HomePageAccenture';
 import LeadershipPage from './pages/LeadershipPage';
 import ContactPage from './pages/ContactPage';
 
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePageAccenture />} />
           <Route path="/leadership" element={<LeadershipPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
