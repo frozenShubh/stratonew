@@ -29,4 +29,6 @@ const HomePage = () => {
       <Footer />
     </div>
   );
-};\n\nexport default HomePage;
+};
+
+export default HomePage;
