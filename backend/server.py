@@ -37,6 +37,42 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+class ContactSubmission(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: EmailStr
+    company: str
+    phone: Optional[str] = None
+    challenge: str
+    submittedAt: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    status: str = "new"
+    source: str = "website"
+    
+    @validator('name')
+    def validate_name(cls, v):
+        if len(v) < 2 or len(v) > 100:
+            raise ValueError('Name must be between 2 and 100 characters')
+        return v.strip()
+    
+    @validator('company')
+    def validate_company(cls, v):
+        if len(v) < 2 or len(v) > 200:
+            raise ValueError('Company must be between 2 and 200 characters')
+        return v.strip()
+    
+    @validator('challenge')
+    def validate_challenge(cls, v):
+        if len(v) < 20 or len(v) > 2000:
+            raise ValueError('Challenge description must be between 20 and 2000 characters')
+        return v.strip()
+
+class ContactSubmissionCreate(BaseModel):
+    name: str
+    email: EmailStr
+    company: str
+    phone: Optional[str] = None
+    challenge: str
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
