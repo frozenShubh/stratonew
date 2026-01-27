@@ -3,20 +3,16 @@ import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { HeroThreeBackground } from './HeroThreeBackground';
 
 export const HeroAccenture = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#020507]">
-      {/* Background with subtle gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0D4669]/20 via-[#020507] to-[#033051]/20" />
+      {/* Three.js Background Animation */}
+      <HeroThreeBackground />
       
-      {/* Animated background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, #539AC1 1px, transparent 1px), radial-gradient(circle at 75% 75%, #A5C7E0 1px, transparent 1px)`,
-          backgroundSize: '50px 50px',
-        }} />
-      </div>
+      {/* Background with subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0D4669]/20 via-[#020507]/50 to-[#033051]/20" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-32 w-full">
         <div className="max-w-4xl">
