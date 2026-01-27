@@ -3,7 +3,7 @@ import { Header } from '../components/Header';
 import { HeroAccenture } from '../components/HeroAccenture';
 import { WhatStratosportCreative } from '../components/WhatStratosportCreative';
 import { InsightsGrid } from '../components/InsightsGrid';
-import { CaseStudiesSlideshow } from '../components/CaseStudiesSlideshow';
+import { CaseStudiesScrollSlideshow } from '../components/CaseStudiesScrollSlideshow';
 import { WhyStratosport } from '../components/WhyStratosport';
 import { CTA } from '../components/CTA';
 import { Footer } from '../components/Footer';
@@ -15,7 +15,7 @@ const HomePageAccenture = () => {
       <HeroAccenture />
       <WhatStratosportCreative />
       <InsightsGrid />
-      <CaseStudiesSlideshow />
+      <CaseStudiesScrollSlideshow />
       <WhyStratosport />
       <CTA />
       <Footer />
