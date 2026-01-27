@@ -64,22 +64,34 @@ export const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <Link to="/contact">
-              <Button
-                size="lg"
-                className="bg-slate-800 hover:bg-slate-700 text-white px-8 py-6 text-lg transition-all duration-300 hover:shadow-xl hover:scale-105 group"
-              >
-                Engage Stratosport
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  className="bg-slate-800 hover:bg-slate-700 text-white px-8 py-6 text-lg transition-all duration-300 hover:shadow-2xl group relative overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center">
+                    Engage Stratosport
+                    <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" size={20} />
+                  </span>
+                  <motion.div
+                    className="absolute inset-0 bg-slate-700"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </Button>
+              </motion.div>
             </Link>
             <a href="#capabilities">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-slate-300 text-slate-900 hover:bg-slate-50 px-8 py-6 text-lg transition-all duration-300 hover:border-slate-400"
-              >
-                Explore Capabilities
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-slate-300 text-slate-900 hover:bg-slate-50 px-8 py-6 text-lg transition-all duration-300 hover:border-slate-500 hover:shadow-lg"
+                >
+                  Explore Capabilities
+                </Button>
+              </motion.div>
             </a>
           </motion.div>
         </div>
