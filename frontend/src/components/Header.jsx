@@ -31,28 +31,27 @@ export const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'
+        isScrolled ? 'bg-[#020507]/95 backdrop-blur-md shadow-lg shadow-[#033051]/20 border-b border-[#033051]/30' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-slate-900">
-              Stratosport
+            <div className="text-2xl font-bold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              Strato<span className="gradient-text">sport</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
+            {navItems.map((item) => (\n              <Link
                 key={item.name}
                 to={item.path}
-                className={`text-sm font-medium transition-colors hover:text-slate-900 ${
+                className={`text-sm font-medium transition-colors hover:text-[#A5C7E0] ${
                   location.pathname === item.path || (item.path.startsWith('/#') && location.pathname === '/')
-                    ? 'text-slate-900'
-                    : 'text-slate-600'
+                    ? 'text-[#539AC1]'
+                    : 'text-[#D9EAF6]'
                 }`}
               >
                 {item.name}
@@ -64,7 +63,7 @@ export const Header = () => {
           <div className="hidden md:block">
             <Link to="/contact">
               <Button
-                className="bg-slate-800 hover:bg-slate-700 text-white transition-all duration-300 hover:shadow-lg"
+                className="bg-gradient-to-r from-[#539AC1] to-[#235D94] hover:from-[#A5C7E0] hover:to-[#539AC1] text-white transition-all duration-300 shadow-[0_0_20px_rgba(83,154,193,0.4)] hover:shadow-[0_0_30px_rgba(83,154,193,0.6)] border-0"
               >
                 Engage Stratosport
               </Button>
@@ -74,7 +73,7 @@ export const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-slate-900"
+            className="md:hidden p-2 text-white"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -87,7 +86,7 @@ export const Header = () => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-white border-t border-slate-200"
+          className="md:hidden bg-[#020507]/98 border-t border-[#033051]/30 backdrop-blur-md"
         >
           <nav className="px-6 py-4 space-y-4">
             {navItems.map((item) => (
@@ -95,13 +94,13 @@ export const Header = () => {
                 key={item.name}
                 to={item.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-base font-medium text-slate-900 hover:text-slate-600 transition-colors"
+                className="block text-base font-medium text-[#D9EAF6] hover:text-[#539AC1] transition-colors"
               >
                 {item.name}
               </Link>
             ))}
             <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button className="w-full bg-slate-800 hover:bg-slate-700 text-white">
+              <Button className="w-full bg-gradient-to-r from-[#539AC1] to-[#235D94] hover:from-[#A5C7E0] hover:to-[#539AC1] text-white border-0">
                 Engage Stratosport
               </Button>
             </Link>
