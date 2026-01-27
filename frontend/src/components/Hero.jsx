@@ -7,18 +7,15 @@ import { motion } from 'framer-motion';
 export const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100">
-      {/* Three.js Background */}
-      <div className="absolute inset-0 opacity-40">
-        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-          <ambientLight intensity={0.5} />
-          <ParticleField />
-          <FloatingGrid />
-        </Canvas>
+      {/* Animated CSS Background */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(71,85,105,0.1),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32 md:py-40">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32 md:py-40\">
+        <div className=\"max-w-4xl mx-auto text-center\">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
