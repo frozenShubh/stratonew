@@ -110,4 +110,4 @@ export const CaseStudies = () => {
       </div>
     </section>
   );
-};}
+};
