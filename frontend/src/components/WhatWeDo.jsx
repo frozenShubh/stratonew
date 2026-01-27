@@ -31,17 +31,17 @@ export const WhatWeDo = () => {
           transition={{ duration: 0.8 }}
           className="max-w-3xl mb-20 text-center mx-auto"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6\">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             What Stratosport Does
           </h2>
-          <p className=\"text-xl text-[#D9EAF6]/70 leading-relaxed\">
+          <p className="text-xl text-[#D9EAF6]/70 leading-relaxed">
             Stratosport provides end-to-end technology and AI leadership — from strategy
             and architecture to execution, governance, and optimization — for organizations
             operating at scale.
           </p>
         </motion.div>
 
-        <div className=\"grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12\">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {features.map((feature, index) => (
             <motion.div
               key={index}
