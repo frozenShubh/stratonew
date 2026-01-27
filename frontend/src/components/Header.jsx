@@ -19,11 +19,21 @@ export const Header = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'Capabilities', path: '/#capabilities' },
-    { name: 'About', path: '/#about' },
+    { name: 'Insights', path: '/#insights' },
+    { name: 'Impact', path: '/#impact' },
     { name: 'Leadership', path: '/leadership' },
     { name: 'Contact', path: '/contact' },
   ];
+
+  const handleNavClick = (e, path) => {
+    if (path.startsWith('/#')) {
+      e.preventDefault();
+      const element = document.getElementById(path.substring(2));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
 
   return (
     <motion.header
@@ -49,6 +59,7 @@ export const Header = () => {
               <Link
                 key={item.name}
                 to={item.path}
+                onClick={(e) => handleNavClick(e, item.path)}
                 className={`text-sm font-medium transition-colors hover:text-[#A5C7E0] ${
                   location.pathname === item.path || (item.path.startsWith('/#') && location.pathname === '/')
                     ? 'text-[#539AC1]'
@@ -94,7 +105,10 @@ export const Header = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  handleNavClick(e, item.path);
+                  setIsMobileMenuOpen(false);
+                }}
                 className="block text-base font-medium text-[#D9EAF6] hover:text-[#539AC1] transition-colors"
               >
                 {item.name}
