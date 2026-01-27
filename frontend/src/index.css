@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,6 +11,8 @@ body {
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: #020507;
+    color: #D9EAF6;
 }
 
 code {
@@ -16,28 +20,29 @@ code {
         monospace;
 }
 
+
 @layer base {
   :root {
-        --background: 0 0% 100%;
-        --foreground: 222 47% 11%;
-        --card: 0 0% 100%;
-        --card-foreground: 222 47% 11%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 222 47% 11%;
-        --primary: 215 28% 17%;
-        --primary-foreground: 0 0% 98%;
-        --secondary: 210 40% 96.1%;
-        --secondary-foreground: 222 47% 11%;
-        --muted: 210 40% 96.1%;
-        --muted-foreground: 215 16% 47%;
-        --accent: 215 20% 65%;
-        --accent-foreground: 222 47% 11%;
+        --background: 220 40% 2%;
+        --foreground: 204 70% 91%;
+        --card: 220 35% 5%;
+        --card-foreground: 204 70% 91%;
+        --popover: 220 35% 5%;
+        --popover-foreground: 204 70% 91%;
+        --primary: 204 67% 45%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 204 48% 65%;
+        --secondary-foreground: 220 40% 2%;
+        --muted: 215 28% 17%;
+        --muted-foreground: 204 30% 70%;
+        --accent: 204 67% 55%;
+        --accent-foreground: 0 0% 100%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
-        --border: 214 32% 91%;
-        --input: 214 32% 91%;
-        --ring: 215 28% 17%;
-        --radius: 0.5rem;
+        --border: 215 28% 17%;
+        --input: 215 28% 17%;
+        --ring: 204 67% 45%;
+        --radius: 0.75rem;
     }
 }
 
