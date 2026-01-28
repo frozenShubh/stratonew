@@ -4,11 +4,13 @@ import * as THREE from 'three';
 export const HeroThreeBackground = () => {
   const containerRef = useRef(null);
   const animationFrameRef = useRef(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    console.log('Three.js animation initializing...');
+    try {
+      const container = containerRef.current; // Store ref value for cleanup
 
     // Scene setup
     const scene = new THREE.Scene();
@@ -37,7 +39,6 @@ export const HeroThreeBackground = () => {
     }
     
     containerRef.current.appendChild(renderer.domElement);
-    console.log('Three.js renderer added to DOM');
 
     // Create animated shapes
     const shapes = [];
@@ -146,64 +147,90 @@ export const HeroThreeBackground = () => {
     const particleSystem = new THREE.Points(particles, particleMaterial);
     scene.add(particleSystem);
 
-    // Add glowing spheres
-    const glowSpheres = [];
-    for (let i = 0; i < 6; i++) {
-      const sphereGeometry = new THREE.SphereGeometry(0.8, 32, 32);
-      const sphereMaterial = new THREE.MeshBasicMaterial({
-        color: 0xA5C7E0,
-        transparent: true,
-        opacity: 0.9,
-      });
-      const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-      sphere.position.x = (Math.random() - 0.5) * 40;
-      sphere.position.y = (Math.random() - 0.5) * 20;
-      sphere.position.z = (Math.random() - 0.5) * 30;
-      scene.add(sphere);
-      glowSpheres.push({
-        mesh: sphere,
-        speed: Math.random() * 0.002 + 0.001,
-        offset: Math.random() * Math.PI * 2,
-      });
-    }
+
+
+    // Mouse interaction variables
+    const mouse = { x: 0, y: 0 };
+    const targetMouse = { x: 0, y: 0 };
+
+    // Mouse move handler
+    const handleMouseMove = (event) => {
+      const rect = container.getBoundingClientRect();
+
+      targetMouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      targetMouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    };
+
+    // Add mouse event listener to document (global mouse tracking)
+    document.addEventListener('mousemove', handleMouseMove);
 
     // Animation loop
     let time = 0;
     let isAnimating = true;
-    
+
     const animate = () => {
       if (!isAnimating) return;
-      
+
       time += 0.01;
 
-      // Animate shapes
-      shapes.forEach((shape) => {
+      // Smooth mouse interpolation
+      mouse.x += (targetMouse.x - mouse.x) * 0.05;
+      mouse.y += (targetMouse.y - mouse.y) * 0.05;
+
+      // Camera movement based on mouse
+      camera.position.x += (mouse.x * 5 - camera.position.x) * 0.02;
+      camera.position.y += (mouse.y * 3 - camera.position.y) * 0.02;
+      camera.lookAt(0, 0, 0);
+
+      // Animate shapes with mouse influence
+      shapes.forEach((shape, index) => {
+        // Base rotation
         shape.mesh.rotation.x += shape.rotationSpeed.x;
         shape.mesh.rotation.y += shape.rotationSpeed.y;
         shape.mesh.rotation.z += shape.rotationSpeed.z;
-        
-        shape.mesh.position.y += Math.sin(time * shape.floatSpeed + shape.floatOffset) * 0.04;
-        shape.mesh.position.x += Math.cos(time * shape.floatSpeed + shape.floatOffset) * 0.03;
+
+        // Calculate mouse influence
+        const mouseDistance = Math.sqrt(
+          Math.pow(shape.mesh.position.x - mouse.x * 20, 2) +
+          Math.pow(shape.mesh.position.y - mouse.y * 15, 2)
+        );
+
+        // Mouse repulsion effect - shapes move away when mouse is close
+        const repulsionStrength = Math.max(0, 1 - mouseDistance / 25) * 0.01;
+        const repulsionX = (shape.mesh.position.x - mouse.x * 20) * repulsionStrength;
+        const repulsionY = (shape.mesh.position.y - mouse.y * 15) * repulsionStrength;
+
+        // Base floating animation
+        const baseX = Math.cos(time * shape.floatSpeed + shape.floatOffset) * 0.03;
+        const baseY = Math.sin(time * shape.floatSpeed + shape.floatOffset) * 0.04;
+
+        // Combine floating with mouse repulsion
+        shape.mesh.position.x += baseX + repulsionX;
+        shape.mesh.position.y += baseY + repulsionY;
+
+        // Increase rotation speed when mouse is close
+        if (repulsionStrength > 0) {
+          shape.mesh.rotation.x += repulsionStrength * 0.1;
+          shape.mesh.rotation.y += repulsionStrength * 0.1;
+        }
+
+        // Scale based on mouse proximity
+        const scale = 1 + repulsionStrength * 3;
+        shape.mesh.scale.setScalar(scale);
       });
 
-      // Animate glowing spheres
-      glowSpheres.forEach((sphere) => {
-        sphere.mesh.position.y += Math.sin(time * sphere.speed + sphere.offset) * 0.06;
-        sphere.mesh.position.x += Math.cos(time * sphere.speed + sphere.offset) * 0.04;
-        
-        const scale = 1 + Math.sin(time * 3 + sphere.offset) * 0.4;
-        sphere.mesh.scale.set(scale, scale, scale);
-      });
 
-      // Rotate particle system
-      particleSystem.rotation.y = time * 0.1;
-      particleSystem.rotation.x = time * 0.06;
+
+
+
+      // Rotate particle system with mouse influence
+      particleSystem.rotation.y = time * 0.1 + mouse.x * 0.2;
+      particleSystem.rotation.x = time * 0.06 + mouse.y * 0.1;
 
       renderer.render(scene, camera);
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    console.log('Starting animation loop...');
     animate();
 
     // Handle resize
@@ -217,28 +244,27 @@ export const HeroThreeBackground = () => {
 
     // Cleanup
     return () => {
-      console.log('Cleaning up Three.js animation');
       isAnimating = false;
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousemove', handleMouseMove);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
-      if (containerRef.current && renderer.domElement) {
-        containerRef.current.removeChild(renderer.domElement);
+      if (container && renderer.domElement) {
+        container.removeChild(renderer.domElement);
       }
-      
+
       // Dispose of geometries and materials
       shapes.forEach(shape => {
         shape.mesh.geometry.dispose();
         shape.mesh.material.dispose();
       });
-      glowSpheres.forEach(sphere => {
-        sphere.mesh.geometry.dispose();
-        sphere.mesh.material.dispose();
-      });
-      
+
       renderer.dispose();
     };
+  } catch (error) {
+    console.error('❌ Error in HeroThreeBackground:', error);
+  }
   }, []);
 
   return (
@@ -251,7 +277,7 @@ export const HeroThreeBackground = () => {
         width: '100%',
         height: '100%',
         opacity: 0.8,
-        pointerEvents: 'none',
+        pointerEvents: 'auto',
       }}
     />
   );

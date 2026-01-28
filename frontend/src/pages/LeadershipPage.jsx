@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { motion } from 'framer-motion';
 import { Linkedin, Mail, Award, Briefcase } from 'lucide-react';
 
 const LeadershipPage = () => {
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+  }, []);
   const leaders = [
     {
       name: 'Rajesh Kumar',

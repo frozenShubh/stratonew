@@ -1,71 +1,29 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, HTTPException, status
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
+from fastapi.security import APIKeyHeader
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict, EmailStr, validator
-from typing import List, Optional
+from pydantic import BaseModel, EmailStr
+from typing import Optional
 import uuid
 from datetime import datetime, timezone
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
-
-# Create the main app without a prefix
+# Create the main app
 app = FastAPI()
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
-
 # Define Models
-class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
-    
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
-
-class ContactSubmission(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str
-    email: EmailStr
-    company: str
-    phone: Optional[str] = None
-    challenge: str
-    submittedAt: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    status: str = "new"
-    source: str = "website"
-    
-    @validator('name')
-    def validate_name(cls, v):
-        if len(v) < 2 or len(v) > 100:
-            raise ValueError('Name must be between 2 and 100 characters')
-        return v.strip()
-    
-    @validator('company')
-    def validate_company(cls, v):
-        if len(v) < 2 or len(v) > 200:
-            raise ValueError('Company must be between 2 and 200 characters')
-        return v.strip()
-    
-    @validator('challenge')
-    def validate_challenge(cls, v):
-        if len(v) < 20 or len(v) > 2000:
-            raise ValueError('Challenge description must be between 20 and 2000 characters')
-        return v.strip()
-
 class ContactSubmissionCreate(BaseModel):
     name: str
     email: EmailStr
@@ -73,61 +31,134 @@ class ContactSubmissionCreate(BaseModel):
     phone: Optional[str] = None
     challenge: str
 
-# Add your routes to the router instead of directly to app
+# API Key authentication
+API_KEY = os.environ.get('API_KEY', 'stratosport-api-key-2024')
+api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+
+async def get_api_key(api_key_header: str = Depends(api_key_header)):
+    if not api_key_header:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="API Key required"
+        )
+    if api_key_header != API_KEY:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid API Key"
+        )
+    return api_key_header
+
+# Email configuration
+BREVO_API_KEY = os.environ.get('BREVO_API_KEY')
+TO_EMAIL = 'shubham.agrawal@stratosport.in'
+
+def send_contact_email(name: str, email: str, company: str, phone: str, challenge: str):
+    """Send contact form submission via Brevo API"""
+    try:
+        import requests
+
+        url = "https://api.brevo.com/v3/smtp/email"
+        headers = {
+            "accept": "application/json",
+            "api-key": BREVO_API_KEY,
+            "content-type": "application/json"
+        }
+
+        payload = {
+            "sender": {
+                "name": name,
+                "email": email
+            },
+            "to": [{
+                "email": TO_EMAIL,
+                "name": "Stratosport Contact"
+            }],
+            "subject": f"New Contact Form Submission from {name}",
+            "htmlContent": f"""
+              <html>
+                <body>
+                  <h2>New Contact Form Submission</h2>
+                  <table style="border-collapse: collapse; width: 100%;">
+                    <tr>
+                      <td style="padding: 8px; border: 1px solid #ddd;"><strong>Name:</strong></td>
+                      <td style="padding: 8px; border: 1px solid #ddd;">{name}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px; border: 1px solid #ddd;"><strong>Email:</strong></td>
+                      <td style="padding: 8px; border: 1px solid #ddd;">{email}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px; border: 1px solid #ddd;"><strong>Company:</strong></td>
+                      <td style="padding: 8px; border: 1px solid #ddd;">{company}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px; border: 1px solid #ddd;"><strong>Phone:</strong></td>
+                      <td style="padding: 8px; border: 1px solid #ddd;">{phone or 'Not provided'}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px; border: 1px solid #ddd;"><strong>Challenge:</strong></td>
+                      <td style="padding: 8px; border: 1px solid #ddd;">{challenge.replace(chr(10), '<br>')}</td>
+                    </tr>
+                  </table>
+                  <br>
+                  <p><em>This email was sent from the Stratosport website contact form.</em></p>
+                </body>
+              </html>
+            """,
+            "textContent": f"""
+New Contact Form Submission
+
+Name: {name}
+Email: {email}
+Company: {company}
+Phone: {phone or 'Not provided'}
+
+Challenge:
+{challenge}
+
+---
+This email was sent from the Stratosport website contact form.
+            """
+        }
+
+        response = requests.post(url, json=payload, headers=headers)
+        response.raise_for_status()
+
+        print(f"Contact email sent successfully to {TO_EMAIL}")
+        return True
+
+    except Exception as e:
+        print(f"Failed to send contact email: {str(e)}")
+        return False
+
+# Routes
 @api_router.get("/")
 async def root():
     return {"message": "Hello World"}
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.model_dump()
-    status_obj = StatusCheck(**status_dict)
-    
-    # Convert to dict and serialize datetime to ISO string for MongoDB
-    doc = status_obj.model_dump()
-    doc['timestamp'] = doc['timestamp'].isoformat()
-    
-    _ = await db.status_checks.insert_one(doc)
-    return status_obj
-
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
-    
-    # Convert ISO string timestamps back to datetime objects
-    for check in status_checks:
-        if isinstance(check['timestamp'], str):
-            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
-    
-    return status_checks
-
-@api_router.post("/contact", response_model=dict, status_code=201)
+@api_router.post("/contact", response_model=dict, status_code=201, dependencies=[Depends(get_api_key)])
 async def create_contact_submission(input: ContactSubmissionCreate):
     try:
-        # Create contact submission object
-        submission_dict = input.dict()
-        submission_obj = ContactSubmission(**submission_dict)
-        
-        # Insert into database
-        result = await db.contact_submissions.insert_one(submission_obj.dict())
-        
-        logger.info(f"Contact submission created: {submission_obj.id}")
-        
+        # Send email notification
+        email_sent = send_contact_email(
+            input.name,
+            input.email,
+            input.company,
+            input.phone,
+            input.challenge
+        )
+
+        if not email_sent:
+            print("Contact email failed to send")
+
         return {
             "success": True,
             "message": "Thank you for reaching out. We'll respond within 24 hours.",
-            "submissionId": submission_obj.id
+            "submissionId": str(uuid.uuid4())
         }
     except Exception as e:
-        logger.error(f"Error creating contact submission: {str(e)}")
+        print(f"Error processing contact submission: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
-
-@api_router.get("/contact", response_model=List[ContactSubmission])
-async def get_contact_submissions():
-    """Get all contact submissions (for admin use)"""
-    submissions = await db.contact_submissions.find().to_list(1000)
-    return [ContactSubmission(**submission) for submission in submissions]
 
 # Include the router in the main app
 app.include_router(api_router)
@@ -139,14 +170,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()

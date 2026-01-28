@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { motion } from 'framer-motion';
@@ -11,8 +11,13 @@ import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const ContactPage = () => {
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+  }, []);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -37,11 +42,16 @@ const ContactPage = () => {
     setError('');
 
     try {
-      const response = await axios.post(`${API}/contact`, formData);
-      
+      const response = await axios.post(`${API}/contact`, formData, {
+        headers: {
+          'X-API-Key': API_KEY,
+          'Content-Type': 'application/json'
+        }
+      });
+
       if (response.data.success) {
         setIsSubmitted(true);
-        
+
         setTimeout(() => {
           setIsSubmitted(false);
           setFormData({
@@ -254,7 +264,7 @@ const ContactPage = () => {
                         Email
                       </p>
                       <a
-                        href="mailto:contact@stratosport.in"
+                        href="mailto:shubham144@gmail.com"
                         className="text-[#D9EAF6] hover:text-[#539AC1] transition-colors"
                       >
                         contact@stratosport.in

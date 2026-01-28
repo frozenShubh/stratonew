@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -8,6 +8,7 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,18 +20,31 @@ export const Header = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Services', path: '/services' },
     { name: 'Capabilities', path: '/#capabilities' },
     { name: 'Impact', path: '/#impact' },
-    { name: 'Leadership', path: '/leadership' },
     { name: 'Contact', path: '/contact' },
   ];
 
   const handleNavClick = (e, path) => {
-    if (path.startsWith('/#')) {
+    if (path === '/') {
+      // Home link - navigate and scroll to top
+      if (location.pathname !== '/') {
+        navigate('/');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (path.startsWith('/#')) {
       e.preventDefault();
-      const element = document.getElementById(path.substring(2));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (location.pathname === '/') {
+        // Already on home page, scroll directly
+        const element = document.getElementById(path.substring(2));
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else {
+        // Navigate to home page with hash
+        navigate(path);
       }
     }
   };
