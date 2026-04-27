@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shubham Kalyan Agrawal – Technology Leader</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --gold: #b08d57;
+    --gold-light: #d4b483;
+    --cream: #f8f5ef;
+    --slate: #2a2f3a;
+    --muted: #7a7a72;
+    --rule: #d9d3c7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding: 56px 56px 0 56px;
+    gap: 32px;
+  }
+
+  .header-left {}
+
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 62px;
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .title-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  .contact-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .chip {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--slate);
+    border: 1px solid var(--rule);
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: white;
+  }
+
+  .header-visual {
+    width: 130px;
+    height: 160px;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, var(--slate) 0%, #1a2035 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .avatar-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+  }
+
+  .avatar-label {
+    font-size: 7px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ─── GOLD RULE ─── */
+  .gold-rule {
+    height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 28px 56px 0 56px;
+  }
+
+  /* ─── PITCH BLOCK ─── */
+  .pitch {
+    padding: 28px 56px;
+    background: var(--slate);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pitch::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px;
+    color: rgba(176,141,87,0.12);
+    position: absolute;
+    top: -30px;
+    left: 40px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .pitch p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.92);
+    max-width: 740px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pitch p strong {
+    font-weight: 600;
+    font-style: normal;
+    color: var(--gold-light);
+  }
+
+  /* ─── BODY GRID ─── */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+    padding: 0 56px;
+    margin-top: 32px;
+  }
+
+  .divider-v {
+    background: var(--rule);
+  }
+
+  .col {
+    padding: 0 28px;
+  }
+
+  .col:first-child { padding-left: 0; }
+  .col:last-child { padding-right: 0; }
+
+  .col-label {
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  /* ─── IMPACT STATS ─── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin: 32px 56px 0 56px;
+  }
+
+  .stat {
+    padding: 20px 0;
+    text-align: center;
+    border-right: 1px solid var(--rule);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ─── COMPANY LOGOS ROW ─── */
+  .companies {
+    padding: 24px 56px 0 56px;
+  }
+
+  .companies-label {
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .company-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .company-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--slate);
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 5px 14px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── AI SECTION ─── */
+  .ai-section {
+    margin: 28px 56px 0 56px;
+    background: linear-gradient(135deg, #0d1117 0%, #1a2035 60%, #0f1820 100%);
+    border-radius: 4px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-section::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(176,141,87,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .ai-section::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30%;
+    width: 150px; height: 150px;
+    background: radial-gradient(circle, rgba(100,160,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .ai-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .ai-badge {
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #0d1117;
+    background: var(--gold);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  .ai-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    letter-spacing: 0.04em;
+  }
+
+  .ai-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    gap: 0;
+  }
+
+  .ai-col {
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ai-col:first-child { padding-left: 0; }
+  .ai-col:last-child { padding-right: 0; }
+
+  .ai-divider {
+    background: rgba(255,255,255,0.08);
+  }
+
+  .ai-col-title {
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ai-col-title::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .ai-items {
+    list-style: none;
+  }
+
+  .ai-items li {
+    font-size: 10px;
+    color: rgba(255,255,255,0.75);
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .ai-items li::before {
+    content: '→';
+    color: var(--gold);
+    flex-shrink: 0;
+    font-size: 9px;
+    margin-top: 1px;
+  }
+
+  .ai-items li:last-child { border-bottom: none; }
+
+  .ai-highlight {
+    color: white;
+    font-weight: 500;
+  }
+
+  /* ─── EXPERTISE TAGS ─── */
+  .expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0;
+  }
+
+  .tag {
+    font-size: 10px;
+    color: var(--ink);
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  /* ─── CAREER TIMELINE ─── */
+  .timeline {
+    list-style: none;
+  }
+
+  .timeline li {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-left: none;
+    position: relative;
+  }
+
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: 44px;
+    top: 6px;
+    bottom: 0;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  .timeline li:last-child::before { display: none; }
+
+  .t-year {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    padding-top: 2px;
+    text-align: right;
+  }
+
+  .t-content {
+    padding-left: 12px;
+  }
+
+  .t-role {
+    font-weight: 500;
+    font-size: 11px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .t-company {
+    font-size: 10px;
+    color: var(--gold);
+    margin-top: 1px;
+  }
+
+  .t-note {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+    line-height: 1.5;
+  }
+
+  /* ─── WHAT I OFFER ─── */
+  .offer-list {
+    list-style: none;
+  }
+
+  .offer-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .offer-list li:last-child { border-bottom: none; }
+
+  .offer-icon {
+    color: var(--gold);
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .offer-title {
+    font-weight: 500;
+    font-size: 11px;
+    color: var(--ink);
+    display: block;
+  }
+
+  .offer-desc {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+    line-height: 1.5;
+  }
+
+  /* ─── AWARDS ─── */
+  .awards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0;
+  }
+
+  .award {
+    font-size: 9.5px;
+    color: var(--slate);
+    background: rgba(176,141,87,0.08);
+    border: 1px solid rgba(176,141,87,0.3);
+    padding: 5px 10px;
+    border-radius: 2px;
+    line-height: 1.4;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    margin-top: 32px;
+    padding: 20px 56px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .cta {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+    background: var(--gold);
+    padding: 10px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  /* ─── DECORATION ─── */
+  .corner-mark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    border-top: 3px solid var(--gold);
+    border-right: 3px solid var(--gold);
+    pointer-events: none;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="corner-mark"></div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">Technology Leadership · AI & Platform Strategy · Consulting</div>
+      <h1>Shubham <em>Kalyan</em><br>Agrawal</h1>
+      <div class="title-line">CTO · VP Engineering & Product · Founder</div>
+      <div class="contact-chips">
+        <span class="chip">📍 Bengaluru, India</span>
+        <span class="chip">📞 +91 99209 71098</span>
+        <span class="chip">✉ shubham@shubhamkagrawal.com</span>
+        <span class="chip">🔗 linkedin.com/in/shubhamkagrawal</span>
+      </div>
+    </div>
+    <div class="header-visual">
+      <div class="avatar-placeholder">
+        <div class="avatar-initials">SKA</div>
+        <div class="avatar-label">Technology Leader</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gold-rule"></div>
+
+  <!-- PITCH -->
+  <div class="pitch">
+    <p>I help enterprises <strong>architect, scale, and modernise technology platforms</strong> — from AI systems and cloud-native infrastructure to high-performance engineering organisations. With nearly <strong>20 years</strong> at the intersection of product, engineering, and business outcomes, I bring CTO-scope thinking to your most complex technology challenges.</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat">
+      <span class="stat-num">20</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">150</span>
+      <span class="stat-label">Engineers Led</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">100M+</span>
+      <span class="stat-label">Events/Day Platforms</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Patents & Awards</span>
+    </div>
+  </div>
+
+  <!-- COMPANIES -->
+  <div class="companies">
+    <div class="companies-label">Built & led platforms at</div>
+    <div class="company-list">
+      <span class="company-tag">Microsoft</span>
+      <span class="company-tag">Amazon</span>
+      <span class="company-tag">Amagi Media Labs</span>
+      <span class="company-tag">Ola</span>
+      <span class="company-tag">Erosnow</span>
+      <span class="company-tag">IBM</span>
+      <span class="company-tag">Sapient</span>
+      <span class="company-tag">Vartalaap / Stratosport</span>
+    </div>
+  </div>
+
+  <!-- AI SECTION -->
+  <div class="ai-section">
+    <div class="ai-header">
+      <span class="ai-badge">AI · ML · LLM</span>
+      <span class="ai-title">Artificial Intelligence Expertise</span>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-col">
+        <div class="ai-col-title">LLM & Generative AI</div>
+        <ul class="ai-items">
+          <li><span><span class="ai-highlight">LLM architecture design</span> — RAG, fine-tuning, prompt engineering, agentic systems</span></li>
+          <li><span><span class="ai-highlight">Secure inference pipelines</span> for enterprise with governance & audit trails</span></li>
+          <li><span>AI transformation roadmaps for <span class="ai-highlight">Fortune 500</span> clients</span></li>
+          <li><span>Multi-model orchestration and <span class="ai-highlight">AI-native SaaS</span> product development</span></li>
+          <li><span>AI security & <span class="ai-highlight">media provenance</span> (patent filing in progress)</span></li>
+        </ul>
+      </div>
+      <div class="ai-divider"></div>
+      <div class="ai-col">
+        <div class="ai-col-title">ML & Data Platforms</div>
+        <ul class="ai-items">
+          <li><span><span class="ai-highlight">AI-driven search</span> — relevance, ranking & discovery at Microsoft M365 scale</span></li>
+          <li><span>Real-time <span class="ai-highlight">event & data pipelines</span> processing 100M+ messages/day</span></li>
+          <li><span>Experimentation frameworks & <span class="ai-highlight">A/B testing</span> infrastructure</span></li>
+          <li><span>Azure + Bing AI integration across <span class="ai-highlight">enterprise search workloads</span></span></li>
+          <li><span>Event-driven automation engines & <span class="ai-highlight">intelligent logging</span> systems</span></li>
+        </ul>
+      </div>
+      <div class="ai-divider"></div>
+      <div class="ai-col">
+        <div class="ai-col-title">AI Adoption & Governance</div>
+        <ul class="ai-items">
+          <li><span><span class="ai-highlight">Multi-cloud AI deployment</span> aligned with ISO 27001 / SOC 2</span></li>
+          <li><span>Responsible AI frameworks — bias, privacy, <span class="ai-highlight">security-by-design</span></span></li>
+          <li><span>Legacy estate modernisation via <span class="ai-highlight">AI-led re-platforming</span></span></li>
+          <li><span>AI-native ventures serving <span class="ai-highlight">200+ enterprises</span> (fintech, BFSI, retail)</span></li>
+          <li><span>Global IAM partner go-to-market for <span class="ai-highlight">secure enterprise AI integrations</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY GRID -->
+  <div class="body-grid" style="margin-top: 28px;">
+
+    <!-- LEFT COL -->
+    <div class="col">
+      <div class="col-label">What I Offer Clients</div>
+      <ul class="offer-list">
+        <li>
+          <span class="offer-icon">◈</span>
+          <div>
+            <span class="offer-title">AI & LLM Strategy</span>
+            <span class="offer-desc">End-to-end AI system design — LLM pipelines, RAG architectures, fine-tuning, agentic workflows, governance, and secure inference. Delivered for Fortune 500 clients and AI-native startups alike.</span>
+          </div>
+        </li>
+        <li>
+          <span class="offer-icon">◈</span>
+          <div>
+            <span class="offer-title">Cloud-Native Architecture</span>
+            <span class="offer-desc">AWS, Azure & multi-cloud platform design. Microservices, event-driven systems, API-first platforms, high availability.</span>
+          </div>
+        </li>
+        <li>
+          <span class="offer-icon">◈</span>
+          <div>
+            <span class="offer-title">Engineering Organisation Scaling</span>
+            <span class="offer-desc">Team structure, hiring senior leaders, Tech Academies, DevOps/SRE practices, and delivery predictability at 100+ headcount.</span>
+          </div>
+        </li>
+        <li>
+          <span class="offer-icon">◈</span>
+          <div>
+            <span class="offer-title">Platform Modernisation</span>
+            <span class="offer-desc">Legacy estate transformation, cost optimisation (up to 75% reduction achieved), and reliability engineering.</span>
+          </div>
+        </li>
+        <li>
+          <span class="offer-icon">◈</span>
+          <div>
+            <span class="offer-title">P&L-Aligned Roadmaps</span>
+            <span class="offer-desc">Technology strategy anchored to revenue outcomes — from early-stage SaaS to $1B+ business units.</span>
+          </div>
+        </li>
+        <li>
+          <span class="offer-icon">◈</span>
+          <div>
+            <span class="offer-title">Security & Compliance</span>
+            <span class="offer-desc">SOC 2, ISO 27001 readiness, security-by-design embedding, and enterprise IAM solutioning.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div style="margin-top: 20px;">
+        <div class="col-label">Core Expertise</div>
+        <div class="expertise-tags">
+          <span class="tag">LLM Systems</span>
+          <span class="tag">RAG Pipelines</span>
+          <span class="tag">AI Governance</span>
+          <span class="tag">Applied ML</span>
+          <span class="tag">AI-native SaaS</span>
+          <span class="tag">Distributed Systems</span>
+          <span class="tag">Multi-tenant SaaS</span>
+          <span class="tag">Real-time Pipelines</span>
+          <span class="tag">Ranking & Relevance</span>
+          <span class="tag">Agile / SRE</span>
+          <span class="tag">Cost Optimisation</span>
+          <span class="tag">Board-level Strategy</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-v"></div>
+
+    <!-- RIGHT COL -->
+    <div class="col">
+      <div class="col-label">Career Highlights</div>
+      <ul class="timeline">
+        <li>
+          <span class="t-year">2023–</span>
+          <div class="t-content">
+            <div class="t-role">CTO — Founder</div>
+            <div class="t-company">Vartalaap / Stratosport · GravityILabs</div>
+            <div class="t-note">AI-native SaaS ventures; 100M+ msg/day platforms; LLM production systems; 200+ enterprise clients.</div>
+          </div>
+        </li>
+        <li>
+          <span class="t-year">2022–23</span>
+          <div class="t-content">
+            <div class="t-role">VP Engineering & Product</div>
+            <div class="t-company">Amagi Media Labs</div>
+            <div class="t-note">Led ~150 engineers; two P&L business units; NAB Award Best Media Tech 2023; multi-cloud infra across AWS, GCP & Azure.</div>
+          </div>
+        </li>
+        <li>
+          <span class="t-year">2018–22</span>
+          <div class="t-content">
+            <div class="t-role">Principal Engineering Manager</div>
+            <div class="t-company">Microsoft Corporation</div>
+            <div class="t-note">Microsoft Enterprise Search across M365; AI-driven relevance & ranking; 94% Engagement Index; IGNITE 2020 showcase.</div>
+          </div>
+        </li>
+        <li>
+          <span class="t-year">2017–18</span>
+          <div class="t-content">
+            <div class="t-role">Software Development Manager III</div>
+            <div class="t-company">Amazon India</div>
+            <div class="t-note">Scaled Vendor Services (contributing to $1B business); 28% per-ticket reduction in first quarter.</div>
+          </div>
+        </li>
+        <li>
+          <span class="t-year">2015–17</span>
+          <div class="t-content">
+            <div class="t-role">Head of Engineering</div>
+            <div class="t-company">Erosnow (Eros International)</div>
+            <div class="t-note">45% server cost reduction; Best AppleTV App; 150% YoY revenue growth via Disney, Airtel & LeTV partnerships.</div>
+          </div>
+        </li>
+        <li>
+          <span class="t-year">2015</span>
+          <div class="t-content">
+            <div class="t-role">Head of Supply Engineering</div>
+            <div class="t-company">Ola</div>
+            <div class="t-note">Driver supply scaled 10K → 350K in 10 months; 5x load systems at $1M daily revenue; 75% cost reduction.</div>
+          </div>
+        </li>
+      </ul>
+
+      <div style="margin-top: 16px;">
+        <div class="col-label">Recognition & Patents</div>
+        <div class="awards">
+          <span class="award">🏆 NAB Best Media Tech 2023</span>
+          <span class="award">📜 US Patent 2023/0345067</span>
+          <span class="award">🌟 Nasscom Social Innovation 2012</span>
+          <span class="award">🎓 Dhirubhai Ambani Scholar</span>
+          <span class="award">🥇 HP Bole Gold Medal – Maths</span>
+          <span class="award">⭐ IBM Bravo & Thanks Award</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      <strong style="font-size: 11px; color: var(--ink);">Available for consulting engagements</strong><br>
+      AI Strategy & LLM Systems · Platform Architecture · Engineering Leadership · CTO-as-a-Service
+    </div>
+    <a class="cta" href="mailto:shubham@shubhamkagrawal.com">Get in Touch →</a>
+  </div>
+</div>
+</body>
+</html>
