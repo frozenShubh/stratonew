@@ -195,7 +195,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Leadership Preview */}
+      {/*
       <section className="py-24 bg-[#0A0D10]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
@@ -220,6 +220,7 @@ const AboutPage = () => {
           </motion.div>
         </div>
       </section>
+      */}
 
       <Footer />
     </div>
