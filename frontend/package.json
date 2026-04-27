@@ -44,9 +44,9 @@
     "input-otp": "^1.2.4",
     "lucide-react": "^0.378.0",
     "next-themes": "^0.3.0",
-    "react": "^18.2.0",
+    "react": "18.2.0",
     "react-day-picker": "8.10.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "18.2.0",
     "react-hook-form": "^7.49.0",
     "react-resizable-panels": "^2.0.0",
     "react-router-dom": "^6.22.3",
@@ -90,5 +90,7 @@
   },
 
    "overrides": {
-  "@react-three/fiber": "8.18.0"}
+   "@react-three/fiber": "8.18.0",
+  "react": "18.2.0",
+  "react-dom": "18.2.0"}
 }
