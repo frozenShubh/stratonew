@@ -50,7 +50,7 @@ async def get_api_key(api_key_header: str = Depends(api_key_header)):
 
 # Email configuration
 BREVO_API_KEY = os.environ.get('BREVO_API_KEY')
-TO_EMAIL = 'shubham.agrawal@stratosport.in'
+TO_EMAIL = 'shubham@stratosport.in'
 
 def send_contact_email(name: str, email: str, company: str, phone: str, challenge: str):
     """Send contact form submission via Brevo API"""
