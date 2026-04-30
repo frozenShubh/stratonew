@@ -5,7 +5,7 @@ import HomePageAccenture from './pages/HomePageAccenture';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import IndustriesPage from './pages/IndustriesPage';
-import LeadershipPage from './pages/LeadershipPage';
+
 import ContactPage from './pages/ContactPage';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/industries" element={<IndustriesPage />} />
-          <Route path="/leadership" element={<LeadershipPage />} />
+
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </BrowserRouter>
