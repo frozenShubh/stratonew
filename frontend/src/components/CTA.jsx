@@ -6,13 +6,14 @@ import { ArrowRight } from 'lucide-react';
 
 export const CTA = () => {
   return (
-    <section className="py-24 md:py-32 bg-slate-900 text-white relative overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
+    <section className="py-24 md:py-32 bg-[#020507] relative overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full opacity-[0.04]"
+        style={{ background: 'radial-gradient(ellipse, #539AC1, transparent 70%)' }}
+      />
+
+      {/* Top gradient border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#539AC1]/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
@@ -22,10 +23,19 @@ export const CTA = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
-            Ready to Build Something Exceptional?
+          <div className="inline-block mb-6">
+            <span className="px-4 py-2 bg-[#0D4669]/30 border border-[#539AC1]/30 rounded-full text-[#539AC1] text-sm font-semibold uppercase tracking-wider">
+              Get Started
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            Ready to Build Something
+            <br />
+            <span className="bg-gradient-to-r from-[#539AC1] to-[#A5C7E0] bg-clip-text text-transparent">
+              Exceptional?
+            </span>
           </h2>
-          <p className="text-xl md:text-2xl text-slate-300 mb-12 leading-relaxed">
+          <p className="text-xl md:text-2xl text-[#D9EAF6]/60 mb-12 leading-relaxed max-w-3xl mx-auto">
             Let's discuss your technology challenges and explore how Stratosport can help you
             build systems that scale, teams that deliver, and outcomes that matter.
           </p>
@@ -33,10 +43,21 @@ export const CTA = () => {
             <Link to="/contact">
               <Button
                 size="lg"
-                className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-6 text-lg transition-all duration-300 hover:shadow-2xl hover:scale-105 group"
+                className="bg-gradient-to-r from-[#539AC1] to-[#235D94] hover:from-[#A5C7E0] hover:to-[#539AC1] text-white px-10 py-7 text-lg font-semibold transition-all duration-300 hover:shadow-[0_0_40px_rgba(83,154,193,0.4)] hover:scale-105 group border-0 rounded-lg"
               >
-                Start a Conversation
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                <span className="flex items-center">
+                  Start a Conversation
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                </span>
+              </Button>
+            </Link>
+            <Link to="/services">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-[#539AC1]/30 text-[#539AC1] hover:bg-[#539AC1]/10 hover:border-[#539AC1] px-10 py-7 text-lg font-semibold transition-all duration-300 rounded-lg bg-transparent"
+              >
+                Explore Services
               </Button>
             </Link>
           </div>
