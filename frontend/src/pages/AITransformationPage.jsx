@@ -19,6 +19,7 @@ import {
   GitBranch,
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import { FAQSection } from '../components/FAQSection';
 
 const AITransformationPage = () => {
   useEffect(() => {
@@ -413,6 +414,37 @@ const AITransformationPage = () => {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FAQSection
+        title="AI Transformation FAQ"
+        faqs={[
+          {
+            question: 'How long does it take to get an AI model into production?',
+            answer: 'With the right infrastructure and engineering practices, we typically get a first AI use case to production within 8-14 weeks. The key is starting with proper data pipelines, ML platform foundations, and governance frameworks — not jumping straight to model development.',
+          },
+          {
+            question: 'What\'s the difference between a POC and a production AI system?',
+            answer: 'A POC proves a concept works on clean data in a controlled environment. A production AI system handles real-world data at scale with defined SLAs for latency, uptime, and accuracy. It includes monitoring, drift detection, rollback capabilities, access controls, and compliance frameworks. The engineering effort to bridge this gap is typically 5-10x the POC effort.',
+          },
+          {
+            question: 'Do we need to hire a full AI team before starting?',
+            answer: 'No. We can operate as your interim AI engineering team while helping you hire and build internal capability. Our goal is always to transfer knowledge and build your team\'s self-sufficiency — not create long-term dependency.',
+          },
+          {
+            question: 'How do you handle AI governance and compliance?',
+            answer: 'We implement responsible AI frameworks from day one — including bias testing, model explainability, audit trails, and approval workflows. For regulated industries, we ensure compliance with GDPR, HIPAA, SOC 2, and the EU AI Act as applicable.',
+          },
+          {
+            question: 'Can you work with our existing data infrastructure?',
+            answer: 'Yes. We assess your current data stack and build AI capabilities on top of it where possible. If there are gaps — missing feature stores, poor data quality, lack of real-time pipelines — we address those as part of the engagement rather than requiring a full rebuild.',
+          },
+          {
+            question: 'What industries do you work with for AI transformation?',
+            answer: 'We work across sectors including fintech, insurance, healthcare, SaaS, e-commerce, and enterprise technology. The specific industry matters less than the maturity of your data and the clarity of your business use cases.',
+          },
+        ]}
+      />
 
       {/* CTA */}
       <section className="py-24 bg-[#0A0D10] relative overflow-hidden">

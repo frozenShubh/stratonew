@@ -20,6 +20,7 @@ import {
   BarChart3,
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import { FAQSection } from '../components/FAQSection';
 
 const GCCPage = () => {
   useEffect(() => {
@@ -399,6 +400,37 @@ const GCCPage = () => {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FAQSection
+        title="GCC Setup FAQ"
+        faqs={[
+          {
+            question: 'How long does it take to set up a GCC in India?',
+            answer: 'With the right partner, you can have entity setup, cloud infrastructure, and your first 5-10 engineers in place within 60-90 days. A fully operational center with 30+ engineers typically takes 6-9 months. The key is starting with senior hires who set the culture, not bulk hiring.',
+          },
+          {
+            question: 'What cities in India are best for a GCC?',
+            answer: 'Bengaluru remains the top choice for deep tech and AI talent. Hyderabad offers excellent infrastructure at lower costs. Pune is strong for enterprise engineering. NCR (Gurugram/Noida) is ideal for proximity to enterprise clients. We help you choose based on your specific talent needs and budget.',
+          },
+          {
+            question: 'What\'s the cost of setting up a GCC in India?',
+            answer: 'Total cost depends on team size, location, and capabilities. A 25-person engineering team in Bengaluru typically costs 60-75% less than an equivalent US team. Setup costs (entity, office, infrastructure) range from $100K-$300K depending on model. We help you build a detailed business case with realistic projections.',
+          },
+          {
+            question: 'Should our GCC be a cost center or a product engineering hub?',
+            answer: 'We strongly recommend positioning it as a product engineering or innovation hub from day one. Cost-center GCCs struggle with talent retention, get assigned low-value work, and rarely justify their investment. AI-first GCCs that own product outcomes attract better talent and deliver higher ROI.',
+          },
+          {
+            question: 'What\'s the Build-Operate-Transfer (BOT) model?',
+            answer: 'In a BOT model, we set up and operate your GCC under our umbrella initially — handling entity setup, hiring, infrastructure, and management. Once the center reaches a defined maturity milestone, we transfer full ownership and operations to you. This minimizes risk and accelerates time to value.',
+          },
+          {
+            question: 'Can you help add AI capabilities to an existing GCC?',
+            answer: 'Yes. Our AI Capability Injection model is designed for exactly this. We assess your current team and infrastructure, design the AI engineering function, help hire specialized talent, set up ML platforms, and establish practices — typically delivering first AI workloads within 4-8 weeks.',
+          },
+        ]}
+      />
 
       {/* CTA */}
       <section className="py-24 bg-[#0A0D10] relative overflow-hidden">

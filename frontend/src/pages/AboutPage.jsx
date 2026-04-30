@@ -203,7 +203,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/*
+      {/* Founder Section */}
       <section className="py-24 bg-[#0A0D10]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
@@ -211,24 +211,99 @@ const AboutPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="mb-16"
           >
+            <div className="inline-block mb-6">
+              <span className="px-4 py-2 bg-[#0D4669]/30 border border-[#539AC1]/30 rounded-full text-[#539AC1] text-sm font-semibold uppercase tracking-wider">
+                Leadership
+              </span>
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Meet Our Leadership
+              Meet the Founder
             </h2>
-            <p className="text-xl text-[#D9EAF6]/70 max-w-3xl mx-auto mb-8">
-              Our team brings decades of experience from building systems at the highest levels of scale and complexity.
-            </p>
-            <a
-              href="/leadership"
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#539AC1] to-[#235D94] hover:from-[#A5C7E0] hover:to-[#539AC1] text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-2xl"
-            >
-              Meet the Team
-            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-2xl overflow-hidden border border-white/[0.06] bg-[#0D1117]/60 backdrop-blur-sm">
+              {/* Left — Photo & Links */}
+              <div className="lg:col-span-4 bg-gradient-to-br from-[#0D4669] to-[#033051] p-8 md:p-10 flex flex-col items-center text-center relative overflow-hidden">
+                <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full border border-white/[0.06]" />
+                <div className="absolute -bottom-12 -left-12 w-36 h-36 rounded-full border border-white/[0.06]" />
+
+                <div className="relative z-10">
+                  {/* Avatar placeholder */}
+                  <div className="w-32 h-32 rounded-full overflow-hidden mb-6 mx-auto border-2 border-white/20 shadow-lg shadow-[#539AC1]/20">
+                    <img src="/founder.png" alt="Shubham Agrawal — Founder & CEO of Stratosport" className="w-full h-full object-cover" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    Shubham Agrawal
+                  </h3>
+                  <p className="text-[#A5C7E0]/80 text-sm mb-6">Founder & CEO</p>
+
+                  <a
+                    href="https://www.linkedin.com/in/shubhamkagrawal/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-full transition-colors duration-300"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    LinkedIn Profile
+                  </a>
+                </div>
+              </div>
+
+              {/* Right — Bio */}
+              <div className="lg:col-span-8 p-8 md:p-10 lg:p-12">
+                <div className="space-y-5 text-[#D9EAF6]/70 leading-relaxed">
+                  <p className="text-lg text-[#D9EAF6]/90">
+                    Shubham is a seasoned technology leader with <strong className="text-white">20+ years of experience</strong> building
+                    and scaling production systems at companies including <strong className="text-white">Microsoft, Amazon, and Amagi</strong>.
+                  </p>
+                  <p>
+                    His career spans the full spectrum of technology leadership — from hands-on engineering and
+                    distributed systems architecture to CTO-level strategy and organizational design. He has led
+                    engineering organizations, built platforms serving millions of users, and guided enterprises
+                    through complex technology transformations.
+                  </p>
+                  <p>
+                    At Amagi, he led the engineering organization through rapid scale — building the cloud infrastructure
+                    and platform engineering capabilities that powered one of the world's largest cloud-based broadcast
+                    platforms. Before that, at Amazon and Microsoft, he worked on large-scale distributed systems,
+                    data platforms, and enterprise infrastructure.
+                  </p>
+                  <p>
+                    He founded Stratosport with a clear thesis: enterprises need senior technology operators who
+                    have actually built and scaled systems — not consultants who only advise. Every Stratosport
+                    engagement is led by people who've been in the trenches.
+                  </p>
+                </div>
+
+                {/* Experience highlights */}
+                <div className="mt-8 pt-8 border-t border-white/[0.06]">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[
+                      { company: 'Microsoft', role: 'Engineering' },
+                      { company: 'Amazon', role: 'Distributed Systems' },
+                      { company: 'Amagi', role: 'Engineering Leadership' },
+                      { company: 'Stratosport', role: 'Founder & CEO' },
+                    ].map((exp, idx) => (
+                      <div key={idx} className="text-center p-3 bg-[#0D4669]/20 rounded-lg">
+                        <div className="text-white text-sm font-semibold">{exp.company}</div>
+                        <div className="text-[#D9EAF6]/40 text-xs mt-1">{exp.role}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
-      */}
 
       <Footer />
     </div>

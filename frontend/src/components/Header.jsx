@@ -24,8 +24,8 @@ export const Header = () => {
     { name: 'AI Transformation', path: '/ai-transformation' },
     { name: 'GCC', path: '/gcc' },
     { name: 'Services', path: '/services' },
-    { name: 'Capabilities', path: '/#capabilities' },
     { name: 'Impact', path: '/#impact' },
+    { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];
 
