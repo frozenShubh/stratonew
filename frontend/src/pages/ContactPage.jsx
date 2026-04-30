@@ -8,12 +8,7 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
 import { Mail, Phone, MapPin, CheckCircle2, Send } from 'lucide-react';
-import axios from 'axios';
 import ReactGA from 'react-ga4';
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-const API_KEY = process.env.REACT_APP_API_KEY;
 
 const ContactPage = () => {
   useEffect(() => {
@@ -44,14 +39,24 @@ const ContactPage = () => {
     setError('');
 
     try {
-      const response = await axios.post(`${API}/contact`, formData, {
-        headers: {
-          'X-API-Key': API_KEY,
-          'Content-Type': 'application/json'
-        }
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
 
-      if (response.data.success) {
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error('Server error. Please try again later.');
+      }
+
+      if (!response.ok) {
+        throw new Error(data.detail || data.error || 'An error occurred');
+      }
+
+      if (data.success) {
         setIsSubmitted(true);
 
         // Track successful contact form submission
@@ -74,7 +79,7 @@ const ContactPage = () => {
       }
     } catch (err) {
       console.error('Contact form submission error:', err);
-      setError(err.response?.data?.detail || 'An error occurred. Please try again.');
+      setError(err.message || 'An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
