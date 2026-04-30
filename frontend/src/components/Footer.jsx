@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Linkedin, Twitter, Mail } from 'lucide-react';
+import { Linkedin, Mail } from 'lucide-react';
 
 export const Footer = () => {
   return (
@@ -14,11 +14,8 @@ export const Footer = () => {
               Engineering Technology & AI Systems That Scale. Boutique consulting for technology leadership, AI systems, and enterprise-grade platforms.
             </p>
             <div className="flex space-x-4 mt-6">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/company/115744746/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
                 <Linkedin size={20} />
-              </a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors">
-                <Twitter size={20} />
               </a>
               <a href="mailto:contact@stratosport.in" className="text-slate-400 hover:text-white transition-colors">
                 <Mail size={20} />
