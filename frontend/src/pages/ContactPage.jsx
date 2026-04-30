@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { motion } from 'framer-motion';
@@ -81,6 +82,13 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-[#020507]">
+      <Helmet>
+        <title>Contact Stratosport | Start Your AI Transformation</title>
+        <meta name="description" content="Get in touch with Stratosport for AI transformation, GCC setup, and enterprise technology consulting. Senior-only engagements with response within 24 hours." />
+        <meta property="og:title" content="Contact Stratosport | Start Your AI Transformation" />
+        <meta property="og:description" content="Connect with senior technology leaders for AI transformation and enterprise platform consulting." />
+        <link rel="canonical" href="https://stratosport.in/contact" />
+      </Helmet>
       <Header />
 
       {/* Hero Section */}

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { StrategicServices } from '../components/StrategicServices';
@@ -23,6 +24,13 @@ const ServicesPage = () => {
 
   return (
     <div className="min-h-screen bg-[#020507]">
+      <Helmet>
+        <title>Technology Services & AI Solutions | Stratosport</title>
+        <meta name="description" content="Strategic technology advisory, AI systems development, platform engineering, and GCC setup. From AI-first digital transformation to production-grade platform delivery." />
+        <meta property="og:title" content="Technology Services & AI Solutions | Stratosport" />
+        <meta property="og:description" content="End-to-end technology services from AI strategy to production. Senior-only consulting for enterprises." />
+        <link rel="canonical" href="https://stratosport.in/services" />
+      </Helmet>
       <Header />
 
       {/* Hero Section */}

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Industries } from '../components/Industries';
@@ -112,6 +113,13 @@ const IndustriesPage = () => {
 
   return (
     <div className="min-h-screen bg-[#020507]">
+      <Helmet>
+        <title>Industry Solutions — SaaS, AI, Healthcare, E-commerce | Stratosport</title>
+        <meta name="description" content="Technology solutions tailored for SaaS, AI-native products, healthcare, education, travel, and e-commerce. Industry-specific AI transformation and platform engineering." />
+        <meta property="og:title" content="Industry Solutions | Stratosport" />
+        <meta property="og:description" content="Sector-specific technology consulting for enterprises across SaaS, AI, healthcare, and more." />
+        <link rel="canonical" href="https://stratosport.in/industries" />
+      </Helmet>
       <Header />
 
       {/* Hero Section */}

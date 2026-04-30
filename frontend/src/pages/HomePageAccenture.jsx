@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Header } from '../components/Header';
 import { HeroAccenture } from '../components/HeroAccenture';
 import { WhatStratosportCreative } from '../components/WhatStratosportCreative';
@@ -24,6 +25,29 @@ const HomePageAccenture = () => {
   }, []);
   return (
     <div className="min-h-screen bg-[#020507]">
+      <Helmet>
+        <title>Stratosport | AI-First Technology Consulting & Digital Transformation</title>
+        <meta name="description" content="Stratosport partners with enterprises to build AI-first technology platforms, set up Global Capability Centers (GCCs), and deliver production-grade AI systems. Senior-only consulting for organizations that demand excellence." />
+        <meta property="og:title" content="Stratosport | AI-First Technology Consulting & Digital Transformation" />
+        <meta property="og:description" content="Senior-only technology consulting for AI transformation, GCC setup, and production-grade platform engineering." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://stratosport.in" />
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Stratosport",
+            "url": "https://stratosport.in",
+            "description": "AI-first technology consulting and digital transformation for enterprises.",
+            "sameAs": [],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "contact@stratosport.in",
+              "contactType": "sales"
+            }
+          }
+        `}</script>
+      </Helmet>
       <Header />
       <HeroAccenture />
       <WhatStratosportCreative />
