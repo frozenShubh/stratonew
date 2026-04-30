@@ -9,7 +9,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">Stratosport</h3>
+            <img src="/logo.png" alt="Stratosport Logo" className="h-20 md:h-32 w-auto mb-6 object-contain origin-left scale-110" />
             <p className="text-slate-400 text-base leading-relaxed max-w-md">
               Engineering Technology & AI Systems That Scale. Boutique consulting for technology leadership, AI systems, and enterprise-grade platforms.
             </p>
