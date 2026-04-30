@@ -57,7 +57,7 @@ export const StrategicServices = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-white">
+    <section className="py-24 md:py-32 bg-[#0A0D10]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -66,10 +66,10 @@ export const StrategicServices = () => {
           transition={{ duration: 0.8 }}
           className="max-w-3xl mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Strategic & Specialized Services
           </h2>
-          <p className="text-xl text-slate-600 leading-relaxed">
+          <p className="text-xl text-[#D9EAF6]/80 leading-relaxed">
             Advanced capabilities for complex challenges — from due diligence to
             modernization, security to platform strategy.
           </p>
@@ -85,21 +85,21 @@ export const StrategicServices = () => {
               transition={{ duration: 0.6, delay: index * 0.05 }}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
             >
-              <Card className="h-full border-slate-200 hover:shadow-2xl transition-all duration-300 hover:border-slate-400 group">
+              <Card className="h-full bg-[#0D1117]/50 border-white/5 hover:shadow-2xl transition-all duration-300 hover:border-[#539AC1]/30 group backdrop-blur-sm">
                 <CardHeader>
                   <motion.div
                     whileHover={{ rotate: 360, scale: 1.1 }}
                     transition={{ duration: 0.6 }}
-                    className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-slate-800 transition-colors duration-300"
+                    className="w-12 h-12 bg-[#0D4669]/50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#539AC1]/20 transition-colors duration-300"
                   >
-                    <service.icon className="text-slate-700 group-hover:text-white transition-colors duration-300" size={24} />
+                    <service.icon className="text-[#539AC1] group-hover:text-white transition-colors duration-300" size={24} />
                   </motion.div>
-                  <CardTitle className="text-lg font-semibold text-slate-900">
+                  <CardTitle className="text-lg font-semibold text-white">
                     {service.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-slate-600 text-sm leading-relaxed">
+                  <p className="text-[#D9EAF6]/70 text-sm leading-relaxed">
                     {service.description}
                   </p>
                 </CardContent>

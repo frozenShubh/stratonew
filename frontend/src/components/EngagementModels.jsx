@@ -52,7 +52,7 @@ export const EngagementModels = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-slate-50">
+    <section className="py-24 md:py-32 bg-[#020507]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -61,10 +61,10 @@ export const EngagementModels = () => {
           transition={{ duration: 0.8 }}
           className="max-w-3xl mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Engagement Models
           </h2>
-          <p className="text-xl text-slate-600 leading-relaxed">
+          <p className="text-xl text-[#D9EAF6]/80 leading-relaxed">
             Flexible engagement approaches designed to meet your organization where you are
             — from strategic guidance to hands-on delivery.
           </p>
@@ -79,24 +79,24 @@ export const EngagementModels = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Card className="h-full border-slate-200 hover:shadow-lg transition-all duration-300">
+              <Card className="h-full bg-[#0D1117]/50 border-white/5 hover:shadow-2xl transition-all duration-300 hover:border-[#539AC1]/30 backdrop-blur-sm group">
                 <CardHeader>
-                  <div className="w-14 h-14 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
-                    <model.icon className="text-slate-700" size={28} />
+                  <div className="w-14 h-14 bg-[#0D4669]/50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#539AC1]/20 transition-colors duration-300">
+                    <model.icon className="text-[#539AC1] group-hover:text-white transition-colors duration-300" size={28} />
                   </div>
-                  <CardTitle className="text-2xl font-semibold text-slate-900 mb-3">
+                  <CardTitle className="text-2xl font-semibold text-white mb-3">
                     {model.title}
                   </CardTitle>
-                  <p className="text-slate-600 leading-relaxed">{model.description}</p>
+                  <p className="text-[#D9EAF6]/70 leading-relaxed">{model.description}</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
                     {model.features.map((feature, featureIndex) => (
                       <li
                         key={featureIndex}
-                        className="text-slate-600 text-sm flex items-start space-x-2"
+                        className="text-[#D9EAF6]/70 text-sm flex items-start space-x-2"
                       >
-                        <span className="text-slate-400 mt-1">•</span>
+                        <span className="text-[#539AC1]/70 mt-1">•</span>
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -112,11 +112,11 @@ export const EngagementModels = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-16 p-8 bg-white border border-slate-200 rounded-lg"
+          className="mt-16 p-8 bg-[#0D1117]/50 border border-[#539AC1]/20 rounded-lg backdrop-blur-sm"
         >
-          <p className="text-lg text-slate-700 leading-relaxed">
-            All engagements emphasize <strong>senior involvement</strong> and{' '}
-            <strong>accountability</strong>. We bring experienced technology leaders who have
+          <p className="text-lg text-[#D9EAF6]/90 leading-relaxed">
+            All engagements emphasize <strong className="text-white font-semibold">senior involvement</strong> and{' '}
+            <strong className="text-white font-semibold">accountability</strong>. We bring experienced technology leaders who have
             built, scaled, and governed complex systems in production environments.
           </p>
         </motion.div>

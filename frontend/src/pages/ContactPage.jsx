@@ -8,6 +8,7 @@ import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
 import { Mail, Phone, MapPin, CheckCircle2, Send } from 'lucide-react';
 import axios from 'axios';
+import ReactGA from 'react-ga4';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -51,6 +52,13 @@ const ContactPage = () => {
 
       if (response.data.success) {
         setIsSubmitted(true);
+
+        // Track successful contact form submission
+        ReactGA.event({
+          category: 'Contact',
+          action: 'submit_contact_form',
+          label: formData.company || 'Unknown Company'
+        });
 
         setTimeout(() => {
           setIsSubmitted(false);

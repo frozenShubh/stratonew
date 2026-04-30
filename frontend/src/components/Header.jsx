@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ReactGA from 'react-ga4';
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -85,6 +86,13 @@ export const Header = () => {
           <div className="hidden md:block">
             <Link to="/contact">
               <Button
+                onClick={() => {
+                  ReactGA.event({
+                    category: 'Engagement',
+                    action: 'click_engage_header',
+                    label: 'Header Engage Button'
+                  });
+                }}
                 className="bg-gradient-to-r from-[#539AC1] to-[#235D94] hover:from-[#A5C7E0] hover:to-[#539AC1] text-white transition-all duration-300 shadow-[0_0_20px_rgba(83,154,193,0.4)] hover:shadow-[0_0_30px_rgba(83,154,193,0.6)] border-0"
               >
                 Engage Stratosport
@@ -124,7 +132,14 @@ export const Header = () => {
                 {item.name}
               </Link>
             ))}
-            <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link to="/contact" onClick={() => {
+              setIsMobileMenuOpen(false);
+              ReactGA.event({
+                category: 'Engagement',
+                action: 'click_engage_mobile_nav',
+                label: 'Mobile Nav Engage Button'
+              });
+            }}>
               <Button className="w-full bg-gradient-to-r from-[#539AC1] to-[#235D94] hover:from-[#A5C7E0] hover:to-[#539AC1] text-white border-0">
                 Engage Stratosport
               </Button>

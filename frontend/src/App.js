@@ -8,10 +8,13 @@ import IndustriesPage from './pages/IndustriesPage';
 
 import ContactPage from './pages/ContactPage';
 
+import { Analytics } from './components/Analytics';
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Analytics />
         <Routes>
           <Route path="/" element={<HomePageAccenture />} />
           <Route path="/about" element={<AboutPage />} />
