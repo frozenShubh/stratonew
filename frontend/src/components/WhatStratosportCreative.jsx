@@ -1,139 +1,170 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, Lightbulb, Users, Zap, Shield, TrendingUp } from 'lucide-react';
+import { Code2, Lightbulb, Users, Zap, Shield, TrendingUp, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const WhatStratosportCreative = () => {
   const services = [
     {
       icon: Lightbulb,
       title: 'Strategic Vision',
-      description: 'Technology roadmaps aligned with business outcomes',
-      color: 'from-[#539AC1] to-[#0D4669]',
+      description: 'Technology roadmaps aligned with business outcomes — not vendor hype.',
+      number: '01',
     },
     {
       icon: Code2,
       title: 'Platform Engineering',
-      description: 'Production-grade systems built for scale',
-      color: 'from-[#0D4669] to-[#033051]',
+      description: 'Production-grade systems designed for 10x scale from day one.',
+      number: '02',
     },
     {
       icon: Zap,
       title: 'AI Systems',
-      description: 'LLM platforms and intelligent automation',
-      color: 'from-[#539AC1] to-[#235D94]',
+      description: 'LLM applications, agentic workflows, and intelligent automation that ships.',
+      number: '03',
     },
     {
       icon: Shield,
       title: 'Reliability & SRE',
-      description: '99.99% uptime and resilient architectures',
-      color: 'from-[#235D94] to-[#0D4669]',
+      description: '99.99% uptime and resilient architectures for mission-critical platforms.',
+      number: '04',
     },
     {
       icon: Users,
       title: 'Team Excellence',
-      description: 'Building high-performing engineering teams',
-      color: 'from-[#0D4669] to-[#539AC1]',
+      description: 'Building and scaling high-performing engineering orgs and GCCs.',
+      number: '05',
     },
     {
       icon: TrendingUp,
       title: 'Cost Optimization',
-      description: 'FinOps and architecture-led efficiency',
-      color: 'from-[#033051] to-[#235D94]',
+      description: 'FinOps and architecture-led efficiency — cut costs without cutting capability.',
+      number: '06',
     },
   ];
 
   return (
-    <section className="relative py-24 md:py-32 bg-[#020507] overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-[#539AC1]/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#0D4669]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+    <section className="relative py-28 md:py-36 bg-[#020507] overflow-hidden">
+      {/* Subtle grid background */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `linear-gradient(#539AC1 1px, transparent 1px), linear-gradient(90deg, #539AC1 1px, transparent 1px)`,
+          backgroundSize: '80px 80px',
+        }} />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header with creative layout */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
-          <div className="inline-block mb-6">
-            <span className="px-4 py-2 bg-[#0D4669]/30 border border-[#539AC1]/30 rounded-full text-[#539AC1] text-sm font-semibold uppercase tracking-wider">
-              Our Expertise
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-            What Stratosport
-            <br />
-            <span className="bg-gradient-to-r from-[#539AC1] to-[#A5C7E0] bg-clip-text text-transparent">
-              Brings to Life
-            </span>
-          </h2>
-          <p className="text-xl md:text-2xl text-[#D9EAF6]/70 max-w-3xl mx-auto leading-relaxed">
-            End-to-end technology and AI leadership — from strategy to execution, 
-            governance to optimization.
-          </p>
-        </motion.div>
+      {/* Accent glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full opacity-[0.04]"
+        style={{ background: 'radial-gradient(ellipse, #539AC1, transparent 70%)' }}
+      />
 
-        {/* Hexagon Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Header — left aligned for more editorial feel */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-7"
+          >
+            <div className="inline-block mb-6">
+              <span className="px-4 py-2 bg-[#0D4669]/30 border border-[#539AC1]/30 rounded-full text-[#539AC1] text-sm font-semibold uppercase tracking-wider">
+                Our Expertise
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              What we
+              <br />
+              <span className="bg-gradient-to-r from-[#539AC1] to-[#A5C7E0] bg-clip-text text-transparent">
+                bring to the table
+              </span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-5 flex items-end"
+          >
+            <p className="text-lg text-[#D9EAF6]/50 leading-relaxed">
+              End-to-end technology and AI leadership — from strategy to production,
+              architecture to optimization. Every engagement is led by senior operators
+              who've done this at scale.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Service rows — horizontal cards with number, divider, content */}
+        <div className="space-y-0">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05, y: -10 }}
-              className="group relative"
+              transition={{ duration: 0.5, delay: index * 0.08 }}
             >
-              {/* Card with gradient border */}
-              <div className="relative h-full bg-[#0D1117]/50 backdrop-blur-sm rounded-2xl p-8 border border-white/5 hover:border-[#539AC1]/50 transition-all duration-500">
-                {/* Gradient overlay on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`} />
+              <div className="group border-t border-white/[0.06] hover:border-[#539AC1]/30 transition-all duration-500">
+                <div className="grid grid-cols-12 gap-4 md:gap-8 py-8 md:py-10 items-center">
+                  {/* Number */}
+                  <div className="col-span-2 md:col-span-1">
+                    <span className="text-[#539AC1]/30 group-hover:text-[#539AC1]/70 text-sm font-mono transition-colors duration-300">
+                      {service.number}
+                    </span>
+                  </div>
 
-                {/* Icon with animated background */}
-                <div className="relative mb-6">
-                  <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.8 }}
-                    className="relative inline-flex"
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${service.color} blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
-                    <div className="relative w-16 h-16 bg-[#0D4669]/50 rounded-xl flex items-center justify-center group-hover:bg-[#539AC1]/20 transition-colors duration-300">
-                      <service.icon className="text-[#A5C7E0] group-hover:text-[#539AC1] transition-colors" size={32} />
+                  {/* Icon */}
+                  <div className="col-span-3 md:col-span-1">
+                    <div className="w-12 h-12 bg-[#0D4669]/30 group-hover:bg-[#539AC1]/15 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110">
+                      <service.icon className="text-[#539AC1]/60 group-hover:text-[#A5C7E0] transition-colors duration-300" size={22} />
                     </div>
-                  </motion.div>
+                  </div>
+
+                  {/* Title */}
+                  <div className="col-span-7 md:col-span-4">
+                    <h3 className="text-xl md:text-2xl font-bold text-white/80 group-hover:text-white transition-colors duration-300" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                      {service.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <div className="col-span-12 md:col-span-5 md:pl-4">
+                    <p className="text-[#D9EAF6]/40 group-hover:text-[#D9EAF6]/70 text-sm md:text-base leading-relaxed transition-colors duration-300">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="hidden md:flex col-span-1 justify-end">
+                    <ArrowRight className="text-[#539AC1]/0 group-hover:text-[#539AC1]/60 transition-all duration-300 group-hover:translate-x-1" size={18} />
+                  </div>
                 </div>
-
-                {/* Content */}
-                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#A5C7E0] transition-colors duration-300">
-                  {service.title}
-                </h3>
-                <p className="text-[#D9EAF6]/70 leading-relaxed">
-                  {service.description}
-                </p>
-
-                {/* Animated bottom line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#539AC1] to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               </div>
             </motion.div>
           ))}
+
+          {/* Bottom border */}
+          <div className="border-t border-white/[0.06]" />
         </div>
 
         {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center mt-16"
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6"
         >
-          <p className="text-lg text-[#D9EAF6]/60">
+          <p className="text-[#D9EAF6]/40 text-lg">
             Ready to transform your technology landscape?
           </p>
+          <Link to="/contact" className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#539AC1] to-[#235D94] hover:from-[#A5C7E0] hover:to-[#539AC1] text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(83,154,193,0.3)]">
+            Start a Conversation
+            <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
+          </Link>
         </motion.div>
       </div>
     </section>
