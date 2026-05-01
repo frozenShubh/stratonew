@@ -6,3 +6,6 @@ pydantic>=2.6.4
 email-validator>=2.2.0
 python-multipart>=0.0.9
 requests>=2.31.0
+google-generativeai>=0.4.1
+tavily-python>=0.3.3
+PyGithub>=2.2.0

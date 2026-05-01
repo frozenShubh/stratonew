@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from agent import run_weekly_agent_workflow
 
 
 ROOT_DIR = Path(__file__).parent
@@ -31,22 +32,34 @@ class ContactSubmissionCreate(BaseModel):
     phone: Optional[str] = None
     challenge: str
 
-# API Key authentication
+# API Key authentication & Vercel Cron authentication
 API_KEY = os.environ.get('API_KEY', 'stratosport-api-key-2024')
-api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+CRON_SECRET = os.environ.get('CRON_SECRET')
 
-async def get_api_key(api_key_header: str = Depends(api_key_header)):
-    if not api_key_header:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="API Key required"
-        )
-    if api_key_header != API_KEY:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid API Key"
-        )
-    return api_key_header
+from fastapi import Header
+
+async def verify_agent_auth(
+    x_api_key: Optional[str] = Header(None, alias="X-API-Key"),
+    authorization: Optional[str] = Header(None)
+):
+    """
+    Allows either X-API-Key (for manual triggers) OR 
+    Vercel's Authorization: Bearer <CRON_SECRET> (for automated crons)
+    """
+    # 1. Check API Key
+    if x_api_key and x_api_key == API_KEY:
+        return True
+        
+    # 2. Check Vercel Cron Secret
+    if authorization and authorization.startswith("Bearer "):
+        token = authorization.split(" ")[1]
+        if CRON_SECRET and token == CRON_SECRET:
+            return True
+
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Unauthorized: Invalid API Key or Cron Secret"
+    )
 
 # Email configuration
 BREVO_API_KEY = os.environ.get('BREVO_API_KEY')
@@ -136,7 +149,7 @@ This email was sent from the Stratosport website contact form.
 async def root():
     return {"message": "Hello World"}
 
-@api_router.post("/contact", response_model=dict, status_code=201, dependencies=[Depends(get_api_key)])
+@api_router.post("/contact", response_model=dict, status_code=201, dependencies=[Depends(verify_agent_auth)])
 async def create_contact_submission(input: ContactSubmissionCreate):
     try:
         # Send email notification
@@ -159,6 +172,20 @@ async def create_contact_submission(input: ContactSubmissionCreate):
     except Exception as e:
         print(f"Error processing contact submission: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.post("/agent/weekly-post", dependencies=[Depends(verify_agent_auth)])
+async def trigger_weekly_agent():
+    """Trigger the weekly blog publishing agent (protected by API Key)"""
+    try:
+        # Note: In a true serverless environment with strict timeouts (e.g. 10s), 
+        # this might time out before completing. If it does, you can trigger this 
+        # as a background task, or run it via a longer-running cron platform.
+        # But for testing and basic use, we run it synchronously here.
+        result = run_weekly_agent_workflow()
+        return result
+    except Exception as e:
+        print(f"Agent error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Include the router in the main app
 app.include_router(api_router)
