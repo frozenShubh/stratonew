@@ -32,8 +32,10 @@ def run_weekly_agent_workflow():
     model = genai.GenerativeModel('gemini-2.5-flash')
     
     prompt = f"""
-    You are an expert AI and Technology Leadership consultant, similar to a former FAANG engineering leader now running a high-end consulting firm called 'Stratosport'.
+    You are the collective voice of the 'Stratosport Team', an elite AI and Technology Leadership consulting firm.
     Your audience is enterprise executives, VP of Engineering, and business leaders.
+    
+    IMPORTANT: You must write exclusively from the perspective of the company. Use "we", "our", and "us". NEVER use "I" or "my".
     
     Here is the latest news context from this week:
     {context}
