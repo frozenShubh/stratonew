@@ -10,6 +10,9 @@ export const ThreeBackground = () => {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    // Skip WebGL rendering during pre-rendering
+    if (navigator.userAgent.includes('ReactSnap')) return;
+
     // Scene setup
     const scene = new THREE.Scene();
     sceneRef.current = scene;

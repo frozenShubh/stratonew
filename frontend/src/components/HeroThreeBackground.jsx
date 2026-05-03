@@ -9,6 +9,11 @@ export const HeroThreeBackground = () => {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    // Skip WebGL rendering if we are pre-rendering with react-snap
+    if (navigator.userAgent.includes('ReactSnap')) {
+      return;
+    }
+
     try {
       const container = containerRef.current; // Store ref value for cleanup
 

@@ -10,6 +10,11 @@ export const AIGlobeBackground = () => {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    // Skip WebGL rendering if we are pre-rendering with react-snap
+    if (navigator.userAgent.includes('ReactSnap')) {
+      return;
+    }
+
     // Scene setup
     const scene = new THREE.Scene();
     sceneRef.current = scene;
