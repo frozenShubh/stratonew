@@ -68,6 +68,10 @@
     "test": "craco test"
   },
   "reactSnap": {
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
     "include": [
       "/",
       "/about",
