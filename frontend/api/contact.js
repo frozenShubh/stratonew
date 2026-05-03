@@ -21,7 +21,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(`${BACKEND_URL}/api/contact`, {
+    const targetUrl = `${BACKEND_URL}/api/contact`;
+    console.log(`[Proxy Debug] Target URL: ${targetUrl}`);
+    console.log(`[Proxy Debug] API Key starts with: ${API_KEY ? API_KEY.substring(0, 4) : 'none'}`);
+    
+    const response = await fetch(targetUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
