@@ -72,8 +72,8 @@
       "--no-sandbox",
       "--disable-setuid-sandbox"
     ],
-    "skipThirdPartyRequests": true,
-    "inlineCss": true,
+    "skipThirdPartyRequests": false,
+    "inlineCss": false,
     "delay": 1000,
     "include": [
       "/",
@@ -93,9 +93,8 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "defaults",
+      "not ie 11"
     ],
     "development": [
       "last 1 chrome version",
