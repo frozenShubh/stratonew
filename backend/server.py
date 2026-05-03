@@ -18,6 +18,17 @@ from agent import run_weekly_agent_workflow
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
+# Configure logging to file and console
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(ROOT_DIR / "app.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
+
 # Create the main app
 app = FastAPI()
 
@@ -79,8 +90,12 @@ def send_contact_email(name: str, email: str, company: str, phone: str, challeng
 
         payload = {
             "sender": {
-                "name": name,
-                "email": email
+                "name": "Stratosport Contact Form",
+                "email": TO_EMAIL
+            },
+            "replyTo": {
+                "email": email,
+                "name": name
             },
             "to": [{
                 "email": TO_EMAIL,
@@ -137,11 +152,16 @@ This email was sent from the Stratosport website contact form.
         response = requests.post(url, json=payload, headers=headers)
         response.raise_for_status()
 
-        print(f"Contact email sent successfully to {TO_EMAIL}")
+        logger.info(f"Contact email sent successfully to {TO_EMAIL}")
         return True
 
     except Exception as e:
-        print(f"Failed to send contact email: {str(e)}")
+        logger.error(f"Failed to send contact email: {str(e)}")
+        if hasattr(e, 'response') and e.response is not None:
+            try:
+                logger.error(f"Brevo API Error Response: {e.response.text}")
+            except Exception:
+                pass
         return False
 
 # Routes
@@ -152,6 +172,9 @@ async def root():
 @api_router.post("/contact", response_model=dict, status_code=201, dependencies=[Depends(verify_agent_auth)])
 async def create_contact_submission(input: ContactSubmissionCreate):
     try:
+        # Log the form submission details
+        logger.info(f"New form submission received: Name: {input.name}, Email: {input.email}, Company: {input.company}, Phone: {input.phone}, Challenge: {input.challenge}")
+
         # Send email notification
         email_sent = send_contact_email(
             input.name,
@@ -162,15 +185,18 @@ async def create_contact_submission(input: ContactSubmissionCreate):
         )
 
         if not email_sent:
-            print("Contact email failed to send")
+            logger.error("Contact email failed to send")
+            raise HTTPException(status_code=500, detail="Failed to send contact email. Please try again later.")
 
         return {
             "success": True,
             "message": "Thank you for reaching out. We'll respond within 24 hours.",
             "submissionId": str(uuid.uuid4())
         }
+    except HTTPException:
+        raise
     except Exception as e:
-        print(f"Error processing contact submission: {str(e)}")
+        logger.error(f"Error processing contact submission: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
 
 @api_router.post("/agent/weekly-post", dependencies=[Depends(verify_agent_auth)])
@@ -184,7 +210,7 @@ async def trigger_weekly_agent():
         result = run_weekly_agent_workflow()
         return result
     except Exception as e:
-        print(f"Agent error: {str(e)}")
+        logger.error(f"Agent error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 # Include the router in the main app
