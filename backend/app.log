@@ -1,0 +1,8 @@
+2026-05-03 14:35:28,166 - INFO - Backend server started and logging initialized.
+2026-05-03 14:36:09,539 - INFO - New form submission received: Name: Shubham Kalyan Agrawal, Email: shubham@shubhamkagrawal.com, Company: dfdsf, Phone: 09920971098, Challenge: dfdsfd
+2026-05-03 14:36:10,257 - ERROR - Failed to send contact email: 401 Client Error: Unauthorized for url: https://api.brevo.com/v3/smtp/email
+2026-05-03 14:36:10,257 - ERROR - Brevo API Error Response: {"message":"We have detected you are using an unrecognised IP address 2401:4900:8fee:ca47:7deb:79ff:142:efee. If you performed this action make sure to add the new IP address in this link: https://app.brevo.com/security/authorised_ips","code":"unauthorized"}
+
+2026-05-03 14:36:10,258 - ERROR - Contact email failed to send
+2026-05-03 14:51:53,307 - INFO - New form submission received: Name: Shubham Kalyan Agrawal, Email: shubham@shubhamkagrawal.com, Company: dfdsf, Phone: 09920971098, Challenge: dfdsfd
+2026-05-03 14:51:54,005 - INFO - Contact email sent successfully to shubham.agrawal@stratosport.in

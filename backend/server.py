@@ -18,16 +18,29 @@ from agent import run_weekly_agent_workflow
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# Configure logging to file and console
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(ROOT_DIR / "app.log"),
-        logging.StreamHandler()
-    ]
-)
+# Configure logging
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# Create handlers
+c_handler = logging.StreamHandler()
+f_handler = logging.FileHandler(ROOT_DIR / "app.log")
+c_handler.setLevel(logging.INFO)
+f_handler.setLevel(logging.INFO)
+
+# Create formatters and add it to handlers
+log_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+c_handler.setFormatter(log_format)
+f_handler.setFormatter(log_format)
+
+# Add handlers to the logger
+logger.addHandler(c_handler)
+logger.addHandler(f_handler)
+
+# Prevent logging from being propagated to the root logger
+logger.propagate = False
+
+logger.info("Backend server started and logging initialized.")
 
 # Create the main app
 app = FastAPI()
