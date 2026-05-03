@@ -1,5 +1,7 @@
+"use client";
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -40,7 +42,7 @@ export const CTA = () => {
             build systems that scale, teams that deliver, and outcomes that matter.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link to="/contact">
+            <Link href="/contact">
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-[#539AC1] to-[#235D94] hover:from-[#A5C7E0] hover:to-[#539AC1] text-white px-10 py-7 text-lg font-semibold transition-all duration-300 hover:shadow-[0_0_40px_rgba(83,154,193,0.4)] hover:scale-105 group border-0 rounded-lg"
@@ -51,7 +53,7 @@ export const CTA = () => {
                 </span>
               </Button>
             </Link>
-            <Link to="/services">
+            <Link href="/services">
               <Button
                 size="lg"
                 variant="outline"

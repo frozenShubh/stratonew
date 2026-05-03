@@ -1,5 +1,7 @@
+"use client";
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -57,7 +59,7 @@ export const HeroAccenture = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <Link to="/contact">
+            <Link href="/contact">
               <Button
                 size="lg"
                 className="bg-[#539AC1] hover:bg-[#A5C7E0] text-white px-10 py-7 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl group border-0 rounded-md"

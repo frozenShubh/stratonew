@@ -1,7 +1,9 @@
+"use client";
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Lightbulb, Users, Zap, Shield, TrendingUp, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export const WhatStratosportCreative = () => {
   const services = [
@@ -161,7 +163,7 @@ export const WhatStratosportCreative = () => {
           <p className="text-[#D9EAF6]/40 text-lg">
             Ready to transform your technology landscape?
           </p>
-          <Link to="/contact" className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#539AC1] to-[#235D94] hover:from-[#A5C7E0] hover:to-[#539AC1] text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(83,154,193,0.3)]">
+          <Link href="/contact" className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#539AC1] to-[#235D94] hover:from-[#A5C7E0] hover:to-[#539AC1] text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(83,154,193,0.3)]">
             Start a Conversation
             <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
           </Link>

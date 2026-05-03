@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Linkedin, Mail } from 'lucide-react';
 
 export const Footer = () => {
@@ -28,32 +28,32 @@ export const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-3">
               <li>
-                <Link to="/" className="text-slate-400 hover:text-white transition-colors text-sm">
+                <Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/ai-transformation" className="text-slate-400 hover:text-white transition-colors text-sm">
+                <Link href="/ai-transformation" className="text-slate-400 hover:text-white transition-colors text-sm">
                   AI Transformation
                 </Link>
               </li>
               <li>
-                <Link to="/gcc" className="text-slate-400 hover:text-white transition-colors text-sm">
+                <Link href="/gcc" className="text-slate-400 hover:text-white transition-colors text-sm">
                   GCC
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-slate-400 hover:text-white transition-colors text-sm">
+                <Link href="/services" className="text-slate-400 hover:text-white transition-colors text-sm">
                   Services
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-slate-400 hover:text-white transition-colors text-sm">
+                <Link href="/about" className="text-slate-400 hover:text-white transition-colors text-sm">
                   About
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-slate-400 hover:text-white transition-colors text-sm">
+                <Link href="/blog" className="text-slate-400 hover:text-white transition-colors text-sm">
                   Blog
                 </Link>
               </li>
@@ -65,7 +65,7 @@ export const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <ul className="space-y-3">
               <li>
-                <Link to="/contact" className="text-slate-400 hover:text-white transition-colors text-sm">
+                <Link href="/contact" className="text-slate-400 hover:text-white transition-colors text-sm">
                   Get in Touch
                 </Link>
               </li>

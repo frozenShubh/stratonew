@@ -1,12 +1,15 @@
+"use client";
+
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname, useSearchParams } from 'next/navigation';
 import ReactGA from 'react-ga4';
 
 // Using the provided GA Measurement ID
 const TRACKING_ID = process.env.REACT_APP_GA_MEASUREMENT_ID || 'G-FYKEMNMV3X';
 
 export const Analytics = () => {
-  const location = useLocation();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     // Initialize GA4 only if tracking ID is present and it hasn't been initialized
@@ -18,9 +21,10 @@ export const Analytics = () => {
   useEffect(() => {
     if (TRACKING_ID) {
       // Send pageview with a custom path
-      ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search });
+      const url = pathname + searchParams.toString();
+      ReactGA.send({ hitType: 'pageview', page: url });
     }
-  }, [location]);
+  }, [pathname, searchParams]);
 
   return null;
 };

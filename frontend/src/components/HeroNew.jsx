@@ -1,5 +1,7 @@
+"use client";
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Button } from './ui/button';
 import { ArrowRight, Sparkles, Zap, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -84,7 +86,7 @@ export const HeroNew = () => {
             transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Link to="/contact">
+            <Link href="/contact">
               <motion.div 
                 whileHover={{ scale: 1.05, y: -3 }} 
                 whileTap={{ scale: 0.98 }}

@@ -1,5 +1,9 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { Button } from './ui/button';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -8,8 +12,8 @@ import ReactGA from 'react-ga4';
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,13 +36,13 @@ export const Header = () => {
   const handleNavClick = (e, path) => {
     if (path === '/') {
       // Home link - navigate and scroll to top
-      if (location.pathname !== '/') {
-        navigate('/');
+      if (pathname !== '/') {
+        router.push('/');
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (path.startsWith('/#')) {
       e.preventDefault();
-      if (location.pathname === '/') {
+      if (pathname === '/') {
         // Already on home page, scroll directly
         const element = document.getElementById(path.substring(2));
         if (element) {
@@ -46,7 +50,7 @@ export const Header = () => {
         }
       } else {
         // Navigate to home page with hash
-        navigate(path);
+        router.push(path);
       }
     }
   };
@@ -62,7 +66,7 @@ export const Header = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2">
             <img src="/logo.png" alt="Stratosport Logo" className="h-20 md:h-28 py-1 w-auto object-contain scale-110 origin-left" />
           </Link>
 
@@ -71,9 +75,9 @@ export const Header = () => {
             {navItems.map((item) => (
               <Link
                 key={item.name}
-                to={item.path}
+                href={item.path}
                 onClick={(e) => handleNavClick(e, item.path)}
-                className={`text-sm font-medium transition-colors hover:text-[#A5C7E0] ${location.pathname === item.path || (item.path.startsWith('/#') && location.pathname === '/')
+                className={`text-sm font-medium transition-colors hover:text-[#A5C7E0] ${pathname === item.path || (item.path.startsWith('/#') && pathname === '/')
                     ? 'text-[#539AC1]'
                     : 'text-[#D9EAF6]'
                   }`}
@@ -85,7 +89,7 @@ export const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link to="/contact">
+            <Link href="/contact">
               <Button
                 onClick={() => {
                   ReactGA.event({
@@ -123,7 +127,7 @@ export const Header = () => {
             {navItems.map((item) => (
               <Link
                 key={item.name}
-                to={item.path}
+                href={item.path}
                 onClick={(e) => {
                   handleNavClick(e, item.path);
                   setIsMobileMenuOpen(false);
@@ -133,7 +137,7 @@ export const Header = () => {
                 {item.name}
               </Link>
             ))}
-            <Link to="/contact" onClick={() => {
+            <Link href="/contact" onClick={() => {
               setIsMobileMenuOpen(false);
               ReactGA.event({
                 category: 'Engagement',

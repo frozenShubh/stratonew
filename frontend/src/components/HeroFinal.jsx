@@ -1,5 +1,7 @@
+"use client";
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Button } from './ui/button';
 import { ArrowRight, Users, TrendingUp, Award, Briefcase } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -50,7 +52,7 @@ export const HeroFinal = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
           >
-            <Link to="/contact">
+            <Link href="/contact">
               <Button
                 size="lg"
                 className="bg-white/90 hover:bg-white text-[#020507] px-10 py-7 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl group border-0 rounded-lg"
