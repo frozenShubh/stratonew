@@ -38,5 +38,6 @@ jobs:
         run: |
           npm install --global vercel
           cd frontend
+          vercel build --token=${{ secrets.VERCEL_TOKEN }}
           vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
           
