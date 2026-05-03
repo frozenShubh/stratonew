@@ -20,7 +20,13 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata = {
   title: 'Stratosport - Shaping Technology',
   description: 'AI-centric engineering and software development services.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 };
+
 
 export const viewport = {
   width: 'device-width',
