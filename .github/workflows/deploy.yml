@@ -39,3 +39,4 @@ jobs:
           npm install --global vercel
           cd frontend
           vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+          
