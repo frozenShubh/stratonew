@@ -42,7 +42,7 @@ const HomePageAccenture = () => {
             "sameAs": [],
             "contactPoint": {
               "@type": "ContactPoint",
-              "email": "contact@stratosport.in",
+              "email": "contactus@stratosport.in",
               "contactType": "sales"
             }
           }

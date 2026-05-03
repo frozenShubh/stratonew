@@ -17,7 +17,7 @@ export const Footer = () => {
               <a href="https://www.linkedin.com/company/115744746/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="mailto:contact@stratosport.in" className="text-slate-400 hover:text-white transition-colors">
+              <a href="mailto:contactus@stratosport.in" className="text-slate-400 hover:text-white transition-colors">
                 <Mail size={20} />
               </a>
             </div>
@@ -70,8 +70,8 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="mailto:contact@stratosport.in" className="text-slate-400 hover:text-white transition-colors text-sm">
-                  contact@stratosport.in
+                <a href="mailto:contactus@stratosport.in" className="text-slate-400 hover:text-white transition-colors text-sm">
+                  contactus@stratosport.in
                 </a>
               </li>
             </ul>

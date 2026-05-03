@@ -288,7 +288,7 @@ const ContactPage = () => {
                         href="mailto:shubham144@gmail.com"
                         className="text-[#D9EAF6] hover:text-[#539AC1] transition-colors"
                       >
-                        contact@stratosport.in
+                        contactus@stratosport.in
                       </a>
                     </div>
                   </div>
