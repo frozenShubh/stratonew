@@ -72,6 +72,9 @@
       "--no-sandbox",
       "--disable-setuid-sandbox"
     ],
+    "skipThirdPartyRequests": true,
+    "inlineCss": true,
+    "delay": 1000,
     "include": [
       "/",
       "/about",
@@ -80,6 +83,11 @@
       "/ai-transformation",
       "/gcc",
       "/blog",
+      "/blog/shaping-future-engineering",
+      "/blog/navigating-complexity-software",
+      "/blog/the-art-of-sustainable-architecture",
+      "/blog/the-evolution-of-devops",
+      "/blog/building-resilient-distributed-systems",
       "/contact"
     ]
   },
