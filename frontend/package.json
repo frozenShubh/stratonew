@@ -72,8 +72,8 @@
       "--no-sandbox",
       "--disable-setuid-sandbox"
     ],
-    "skipThirdPartyRequests": false,
-    "inlineCss": false,
+    "skipThirdPartyRequests": true,
+    "inlineCss": true,
     "delay": 1000,
     "include": [
       "/",
