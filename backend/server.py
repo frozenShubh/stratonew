@@ -63,7 +63,7 @@ async def verify_agent_auth(
 
 # Email configuration
 BREVO_API_KEY = os.environ.get('BREVO_API_KEY')
-TO_EMAIL = 'shubham@stratosport.in'
+TO_EMAIL = 'shubham.agrawal@stratosport.in'
 
 def send_contact_email(name: str, email: str, company: str, phone: str, challenge: str):
     """Send contact form submission via Brevo API"""
