@@ -203,7 +203,7 @@ async def create_contact_submission(input: ContactSubmissionCreate):
         logger.error(f"Error processing contact submission: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
 
-@api_router.post("/agent/weekly-post", dependencies=[Depends(verify_agent_auth)])
+@api_router.get("/agent/weekly-post", dependencies=[Depends(verify_agent_auth)])
 async def trigger_weekly_agent():
     """Trigger the weekly blog publishing agent (protected by API Key)"""
     try:

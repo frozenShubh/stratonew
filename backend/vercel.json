@@ -9,6 +9,11 @@
       }
     }
   ],
+  "functions": {
+    "server.py": {
+      "maxDuration": 60
+    }
+  },
   "routes": [
     {
       "src": "/(.*)",

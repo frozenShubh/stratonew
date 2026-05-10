@@ -18,7 +18,24 @@ def run_weekly_agent_workflow():
         
     print("Starting agent workflow...")
 
-    # 2. Research Phase (Tavily)
+    # 2. Fetch Past Topics for Variety (GitHub)
+    print("Fetching past topics for variety...")
+    past_topics = []
+    try:
+        g = Github(github_token)
+        repo = g.get_repo("frozenShubh/stratonew")
+        file_path = "frontend/src/data/blogPosts.js"
+        contents = repo.get_contents(file_path)
+        file_content = contents.decoded_content.decode('utf-8')
+        
+        # Extract titles using regex
+        titles = re.findall(r"title:\s*'([^']*)'", file_content)
+        past_topics = titles[-5:] # Get last 5
+        print(f"Found {len(past_topics)} past topics.")
+    except Exception as e:
+        print(f"Warning: Could not fetch past topics: {e}")
+
+    # 3. Research Phase (Tavily)
     print("Researching recent news...")
     tavily = TavilyClient(api_key=tavily_key)
     search_query = "latest enterprise AI adoption, tech leadership trends, OR India GCC strategy news this week"
@@ -26,16 +43,21 @@ def run_weekly_agent_workflow():
     
     context = "\n".join([f"Source: {res['url']}\nContent: {res['content']}" for res in search_results['results']])
 
-    # 3. Writing Phase (Gemini)
+    # 4. Writing Phase (Gemini)
     print("Drafting blog post via Gemini...")
     genai.configure(api_key=gemini_key)
     model = genai.GenerativeModel('gemini-2.5-flash')
+    
+    past_topics_str = "\n".join([f"- {t}" for t in past_topics])
     
     prompt = f"""
     You are the collective voice of the 'Stratosport Team', an elite AI and Technology Leadership consulting firm.
     Your audience is enterprise executives, VP of Engineering, and business leaders.
     
     IMPORTANT: You must write exclusively from the perspective of the company. Use "we", "our", and "us". NEVER use "I" or "my".
+    
+    Here are our RECENT blog post titles. DO NOT cover these exact topics again. Ensure high variety and a fresh angle:
+    {past_topics_str}
     
     Here is the latest news context from this week:
     {context}
@@ -48,18 +70,13 @@ def run_weekly_agent_workflow():
     Wrap headers like this: <h2 style="font-size: 1.75rem; font-weight: 700; color: white; margin-bottom: 1rem; margin-top: 2.5rem; font-family: 'Space Grotesk', sans-serif;">
     Wrap bullet points like this: <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem;"><span style="color: #539AC1; font-weight: bold;">→</span><span><strong style="color: white;">...</span></li>
     
-    Task 2: Write a LinkedIn post caption to share this blog post. It should have a strong hook, 3-4 bullet points, relevant hashtags, and invite readers to read the full post.
+    Task 2: Write a LinkedIn post caption to share this blog post. It should have a strong hook, 3-4 bullet points, relevant hashtags.
+    IMPORTANT: Do NOT include any placeholders like [Link to blog post] or [URL]. The system will append the link automatically. Just write the caption content.
     
     Return the response STRICTLY in valid JSON format. Do not use markdown code blocks, just raw JSON with the following keys:
-    "title" - The blog post title
-    "slug" - kebab-case-slug
-    "excerpt" - A 2-3 sentence excerpt
-    "tags" - Array of string tags
-    "content" - The raw HTML content string
-    "linkedin" - The LinkedIn post string
+    "title", "slug", "excerpt", "tags", "content", "linkedin"
     """
     
-    import json
     response = model.generate_content(prompt)
     output = response.text.strip()
     if output.startswith("```json"):
@@ -69,6 +86,35 @@ def run_weekly_agent_workflow():
         
     try:
         data = json.loads(output)
+    except Exception as e:
+        raise Exception(f"Failed to parse LLM JSON output: {e}\nRaw output: {output}")
+
+    # 5. Proofread Agent (Gemini)
+    print("Proofreading content...")
+    proofread_prompt = f"""
+    You are a professional editor and proofreader for a premium consulting firm.
+    Review the following blog post and LinkedIn caption for:
+    1. Placeholders: Ensure there are NO placeholders like [Link], [Name], [Insert], etc.
+    2. Tone: Ensure it is authoritative, professional, and uses "we/our/us" (never "I").
+    3. Variety: Ensure it doesn't sound too similar to these recent topics: {past_topics_str}
+    4. HTML: Ensure headers and bullet points match the requested styles exactly.
+    5. LinkedIn: Ensure it doesn't have any trailing placeholders for links.
+    
+    Original Data:
+    {json.dumps(data, indent=2)}
+    
+    Return the polished version in the EXACT same JSON format.
+    """
+    
+    proofread_response = model.generate_content(proofread_prompt)
+    proof_output = proofread_response.text.strip()
+    if proof_output.startswith("```json"):
+        proof_output = proof_output[7:-3].strip()
+    elif proof_output.startswith("```"):
+        proof_output = proof_output[3:-3].strip()
+        
+    try:
+        data = json.loads(proof_output)
         title = data["title"]
         slug = data["slug"]
         excerpt = data["excerpt"]
@@ -76,7 +122,13 @@ def run_weekly_agent_workflow():
         content = data["content"]
         linkedin_post = data["linkedin"]
     except Exception as e:
-        raise Exception(f"Failed to parse LLM JSON output: {e}\\nRaw output: {output}")
+        print(f"Proofread parsing failed: {e}. Falling back to original data.")
+        title = data["title"]
+        slug = data["slug"]
+        excerpt = data["excerpt"]
+        tags = data["tags"]
+        content = data["content"]
+        linkedin_post = data["linkedin"]
     
     today = datetime.datetime.now()
     date_str = today.strftime("%B %d, %Y")
@@ -86,13 +138,9 @@ def run_weekly_agent_workflow():
     word_count = len(re.sub(r'<[^>]+>', '', content).split())
     read_time = max(1, round(word_count / 200))
 
-    # 4. Publish to Website (GitHub)
+    # 6. Publish to Website (GitHub)
     print(f"Committing new blog post '{title}' to GitHub...")
     try:
-        g = Github(github_token)
-        repo = g.get_repo("frozenShubh/stratonew")
-        file_path = "frontend/src/data/blogPosts.js"
-        
         contents = repo.get_contents(file_path)
         file_content = contents.decoded_content.decode('utf-8')
         
@@ -130,36 +178,9 @@ def run_weekly_agent_workflow():
         github_success = True
     except Exception as e:
         print(f"GitHub push failed: {e}")
-        print("Writing locally instead...")
-        # Fallback to local file
-        local_path = "../frontend/src/data/blogPosts.js"
-        with open(local_path, "r") as f:
-            local_content = f.read()
-            
-        match = re.search(r'];\s*$', local_content)
-        if match:
-            tags_formatted = ", ".join([f"'{t}'" for t in tags])
-            new_post_obj = f"""  {{
-    slug: '{slug}',
-    title: '{title.replace("'", "\\'")}',
-    excerpt: '{excerpt.replace("'", "\\'")}',
-    category: 'Industry Insights',
-    author: 'Shubham Agrawal',
-    date: '{date_str}',
-    dateISO: '{date_iso}',
-    readTime: '{read_time} min read',
-    tags: [{tags_formatted}],
-    content: `
-      {content}
-    `,
-  }},
-"""
-            new_local_content = local_content[:match.start()] + new_post_obj + local_content[match.start():]
-            with open(local_path, "w") as f:
-                f.write(new_local_content)
         github_success = False
 
-    # 5. Publish to LinkedIn
+    # 7. Publish to LinkedIn
     if linkedin_token:
         print("Publishing to LinkedIn Company Page...")
         headers = {
@@ -172,6 +193,10 @@ def run_weekly_agent_workflow():
         urn = "urn:li:organization:115744746"
         
         post_url = "https://api.linkedin.com/v2/ugcPosts"
+        
+        # Clean up any potential placeholders that might have slipped through
+        linkedin_post = re.sub(r'\[.*?\]', '', linkedin_post).strip()
+        
         final_linkedin_text = f"{linkedin_post}\n\nRead the full insight here: https://stratosport.in/blog/{slug}"
         
         post_payload = {
